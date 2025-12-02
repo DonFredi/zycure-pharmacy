@@ -1,6 +1,6 @@
 // app/sections/components/FeatureCard.tsx
-import { Feature } from "@/src/types/features";
-import Title from "@/src/components/ui/Title";
+import { Feature } from "@/types/features";
+import Title from "@/components/ui/Title";
 
 const FeatureCard = ({ imageSrc, title, description }: Feature) => {
   return (
