@@ -14,7 +14,7 @@ const Header = () => {
         <NavLink href="/contacts" label="Contact" />
       </nav>
 
-      <Cart />
+      <Cart className="text-primary" />
     </header>
   );
 };

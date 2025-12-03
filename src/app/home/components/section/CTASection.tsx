@@ -4,7 +4,7 @@ import { Upload } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <div className="bg-primary md:rounded-full rounded-none p-4 md:w-[80%] w-full md:mx-auto min-h-[135px] flex flex-col md:flex-row justify-between items-center text-center gap-4">
+    <div className="bg-primary md:rounded-full rounded-none p-2 md:w-[80%] w-full md:mx-auto min-h-[135px] flex flex-col md:flex-row justify-between items-center text-center gap-4">
       <Title
         text="Upload Prescription"
         as="h3"
