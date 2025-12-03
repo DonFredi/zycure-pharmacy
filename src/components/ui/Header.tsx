@@ -6,9 +6,9 @@ import Cart from "../icons/Cart";
 
 const Header = () => {
   return (
-    <header className="flex align-center justify-between p-6 ">
+    <header className="flex items-center justify-between p-6 ">
       <Logo />
-      <nav className="flex flex-row gap-6 justify-center h-fit">
+      <nav className="hidden md:flex flex-row gap-6 justify-center h-fit">
         <NavLink href="/" label="Home" />
         <NavLink href="/products" label="Products" />
         <NavLink href="/contacts" label="Contact" />
