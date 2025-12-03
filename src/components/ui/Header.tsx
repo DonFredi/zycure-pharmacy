@@ -2,7 +2,7 @@
 
 import NavLink from "./NavLink";
 import Logo from "./Logo";
-import Cart from "../../../public/icons/Cart";
+import Cart from "../icons/Cart";
 
 const Header = () => {
   return (

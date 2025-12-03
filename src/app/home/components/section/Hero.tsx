@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import Title from "@/components/ui/Title";
+import { Upload } from "lucide-react";
 import Image from "next/image";
 
 const Hero = () => {
@@ -28,6 +29,7 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
+              <Upload />
               Upload Prescription
             </a>
           </Button>

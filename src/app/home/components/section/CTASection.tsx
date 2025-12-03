@@ -1,18 +1,21 @@
 import { Button } from "@/components/ui/Button";
 import Title from "@/components/ui/Title";
+import { Upload } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <div className="bg-primary md:rounded-full sm:rounded-none p-4 md:w-[80%] sm:w-full md:mx-auto min-h-[130px] flex flex-col justify-between items-center text-center gap-4">
+    <div className="bg-primary md:rounded-full rounded-none p-4 md:w-[80%] w-full md:mx-auto min-h-[135px] flex flex-col md:flex-row justify-between items-center text-center gap-4">
       <Title
-        text="UPLOAD PRESCRIPTION"
+        text="Upload Prescription"
         as="h3"
         size="xxl"
         align="center"
         color="text-white"
         className="text-xl font-bold"
       />
-      <p className="text-white">Do you have a prescription and need advice? Please upload your prescription here.</p>
+      <p className="text-white text-wrap">
+        Do you have a prescription and need advice? Please upload your prescription here.
+      </p>
 
       <Button variant={"outline"} className="bg-white hover:bg-neutral" asChild>
         <a
@@ -20,6 +23,7 @@ const CTASection = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
+          <Upload />
           Upload Prescription
         </a>
       </Button>
