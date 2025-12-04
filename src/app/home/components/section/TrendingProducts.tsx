@@ -10,7 +10,7 @@ const TrendingProducts = () => {
     <SectionContainer>
       <div className="flex flex-row justify-between gap-6 p-2 items-center">
         <Title
-          text="Top Trending Searches"
+          text="Top Searches"
           as="h2"
           size="xxl"
           align="left"
