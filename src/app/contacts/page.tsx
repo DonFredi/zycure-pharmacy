@@ -1,7 +1,9 @@
+import ContactSection from "./components/section/ContactSection";
+
 const page = () => {
   return (
     <div>
-      <h1>This is the Contacts Page</h1>
+      <ContactSection />
     </div>
   );
 };
