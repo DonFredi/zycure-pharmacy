@@ -6,7 +6,7 @@ import Image from "next/image";
 const Hero = () => {
   return (
     <section className="bg-neutral gap-4 p-2 md:p-12 grid md:grid-cols-2 grid-cols-1">
-      <div className="flex flex-col max-w-[652px] justify-center gap-6">
+      <div className="flex flex-col max-w-[652px] items-center gap-6">
         <Title
           text="Fast. Reliable. Online Pharmacy You Can Trust."
           as="h1"
