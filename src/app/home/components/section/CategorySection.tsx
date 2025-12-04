@@ -1,9 +1,10 @@
 import Title from "@/components/ui/Title";
 import CauroselSection from "./CauroselSection";
+import SectionContainer from "@/components/section/SectionContainer";
 
 const CategorySection = () => {
   return (
-    <section className=" mt-4 w-full p-2 flex flex-col gap-6">
+    <SectionContainer>
       <Title
         text="Shop by Category"
         as="h2"
@@ -13,7 +14,7 @@ const CategorySection = () => {
         className="text-xl font-bold"
       />
       <CauroselSection />
-    </section>
+    </SectionContainer>
   );
 };
 export default CategorySection;

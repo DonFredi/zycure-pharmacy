@@ -50,7 +50,10 @@
   /* RADIUS */
   --radius-rounded-md: 8px;
 }
-
+.border {
+  border-width: 1px;
+  border-color: var(--foreground);
+}
 /* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

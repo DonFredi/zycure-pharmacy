@@ -4,7 +4,7 @@ import Badge from "@/components/icons/Badge";
 import Hours from "@/components/icons/Hours";
 
 // data/features.ts
-export const features = [
+export const features: Feature[] = [
   {
     id: 1,
     icon: <Truck />,
