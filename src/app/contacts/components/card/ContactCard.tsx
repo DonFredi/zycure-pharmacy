@@ -5,7 +5,7 @@ import Title from "@/components/ui/Title";
 
 const ContactCard = () => {
   return (
-    <div className="flex flex-col items-left gap-4">
+    <div className="flex flex-col items-left gap-2.5 px-6 py-4">
       <Title
         text="Send us a message"
         as="h2"
