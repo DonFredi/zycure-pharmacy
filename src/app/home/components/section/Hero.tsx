@@ -1,9 +1,15 @@
+"use client";
 import { Button } from "@/components/ui/Button";
 import Title from "@/components/ui/Title";
 import { Upload } from "lucide-react";
 import Image from "next/image";
 
 const Hero = () => {
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP;
+  const whatsappMessage = encodeURIComponent("Hello, I would like to upload a prescription");
+
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
   return (
     <section className="bg-neutral gap-4 p-6 md:p-12 grid md:grid-cols-2 grid-cols-1">
       <div className="flex flex-col max-w-[652px] items-center gap-6">
@@ -24,11 +30,7 @@ const Hero = () => {
             </a>
           </Button>
           <Button variant={"outline"} asChild>
-            <a
-              href="https://wa.me/254710567066?text=Hello%20I%20would%20like%20to%20upload%20a%20prescription"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
               <Upload />
               Upload Prescription
             </a>
