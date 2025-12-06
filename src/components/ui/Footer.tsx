@@ -19,7 +19,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="flex flex-row justify-start gap-8">
+          <div className="flex flex-row md:justify-around justify-between p-4">
             <div>
               <h4 className="text-primary font-bold text-xl">Quick Links</h4>
               <ul className="flex flex-col">

@@ -5,7 +5,7 @@ import GetInTouch from "../card/GetInTouch";
 const ContactSection = () => {
   return (
     <SectionContainer>
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col md:flex-row md:justify-around">
         <GetInTouch />
         <ContactCard />
       </div>

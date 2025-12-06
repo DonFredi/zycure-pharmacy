@@ -16,14 +16,14 @@ const GetInTouch = () => {
         Whether you have questions about your prescription, need guidance on medication use, or want to learn more about
         our products and services, our friendly team is ready to assist you.
       </p>
-      <div className="flex flex-wrap">
+      <div className="flex flex-col gap-2 w-full">
         {contacts.map((contact) => (
           <a
             key={contact.id}
             href="/products"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-row gap-1 items-center w-1/2 my-1"
+            className="flex flex-row gap-4 items-center my-1"
           >
             <div className="w-fit h-fit bg-neutral rounded-full flex flex-col items-center p-2 text-primary">
               {contact.icon}
