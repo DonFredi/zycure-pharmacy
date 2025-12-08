@@ -1,0 +1,52 @@
+mutation CreateNewInquiry(
+  $customerEmail: String
+  $customerName: String
+  $message: String!
+  $subject: String!
+) @auth(
+  level: PUBLIC
+  insecureReason: "This mutation is safe to expose to the public"
+) {
+  inquiry_insert(
+    data: {
+      customerEmail: $customerEmail
+      customerName: $customerName
+      message: $message
+      subject: $subject
+      submittedAt: "request.time"
+    }
+  )
+}
+
+query ListMedications @auth(
+  level: PUBLIC
+  insecureReason: "This query is safe to expose to the public"
+) {
+  medications {
+    id
+    name
+    dosage
+    manufacturer
+    price
+    stockQuantity
+    description
+    reorderLevel
+  }
+}
+
+mutation UpdateMedicationStock(
+  $id: UUID!
+  $stockQuantity: Int!
+) @auth(level: USER) {
+  medication_update(key: { id: $id }, data: { stockQuantity: $stockQuantity }) {
+    id
+  }
+}
+
+query ListCategories @auth(level: USER) {
+  categories {
+    id
+    name
+    description
+  }
+}

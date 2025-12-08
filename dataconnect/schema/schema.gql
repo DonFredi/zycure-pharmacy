@@ -1,0 +1,37 @@
+type User @table {
+  username: String!
+  passwordHash: String!
+  role: String!
+  email: String
+  firstName: String
+  lastName: String
+}
+
+type Medication @table {
+  name: String!
+  dosage: String!
+  price: Float!
+  stockQuantity: Int!
+  description: String
+  manufacturer: String
+  reorderLevel: Int
+}
+
+type Category @table {
+  name: String!
+  description: String
+}
+
+type MedicationCategory @table(key: ["medication", "category"]) {
+  medication: Medication!
+  category: Category!
+}
+
+type Inquiry @table {
+  subject: String!
+  message: String!
+  submittedAt: Timestamp!
+  customerEmail: String
+  customerName: String
+  status: String
+}

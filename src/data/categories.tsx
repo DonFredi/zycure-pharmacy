@@ -41,4 +41,9 @@ export const categories: Category[] = [
     imageSrc: "/images/men.png",
     title: "Men",
   },
+  {
+    id: 9,
+    imageSrc: "/images/men.png",
+    title: "Prescription",
+  },
 ];

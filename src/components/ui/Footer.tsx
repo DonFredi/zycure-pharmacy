@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Logo from "./Logo";
 import Image from "next/image";
+import Copyright from "../icons/Copyright";
 
 const Footer = () => {
   const date = new Date();
@@ -48,7 +49,10 @@ const Footer = () => {
         </div>
       </div>
 
-      <p>{year} ZyCure Pharmacy.All Rights Reserved.</p>
+      <p className="text-foreground flex flex-row text-wrap items-center">
+        <Copyright />
+        {year} ZyCure Pharmacy.All Rights Reserved.
+      </p>
     </footer>
   );
 };

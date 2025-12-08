@@ -5,6 +5,7 @@ import { useState } from "react";
 import ArrowDown from "../icons/ArrowDown";
 import ArrowUp from "../icons/ArrowUp";
 import Cancel from "../icons/Cancel";
+import Logo from "./Logo";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -20,9 +21,15 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
   transform ${isOpen ? "translate-x-0" : "-translate-x-full"} 
   transition-transform duration-300 z-50`}
     >
-      <button className="p-4 text-xl bg-red-300 w-fit h-fit text-foreground" onClick={() => setIsOpen(false)}>
-        <Cancel />
-      </button>
+      <div className="flex flex-row justify-between p-1 items-center">
+        <Logo />
+        <button
+          className="p-2 text-xl border border-primary w-fit h-fit text-primary rounded-sm"
+          onClick={() => setIsOpen(false)}
+        >
+          <Cancel />
+        </button>
+      </div>
 
       <ul className="flex flex-col gap-6 p-6 text-lg">
         <li>
@@ -57,12 +64,12 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
             Beauty
           </Link>
           <Link href="/products/medical-equipment" className="hover:text-primary">
-            Medical Equipment
+            Devices & Diagnostics
           </Link>
         </div>
 
         <li>
-          <a href="/contact">Contact</a>
+          <a href="/contacts">Contact</a>
         </li>
       </ul>
     </div>
