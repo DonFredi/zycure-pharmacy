@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       from: "Zycure Pharmacy <onboarding@resend.dev>",
       to: process.env.CONTACT_EMAIL!,
       subject: "New Contact Form Message",
-      reply_to: email,
+      replyTo: email,
       text: `
 Name: ${name}
 Email: ${email}
