@@ -5,6 +5,16 @@ const nextConfig: NextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+        port: "", // usually empty
+        pathname: "/**", // allow all paths under this hostname
+      },
+    ],
+  },
 };
 
 export default nextConfig;

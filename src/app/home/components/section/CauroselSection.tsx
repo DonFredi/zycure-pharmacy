@@ -1,8 +1,12 @@
+"use client";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import CategoryCard from "../card/CategoryCard";
-import { categories } from "@/data/categories";
+import { useCategories } from "@/hooks/useCategory";
 
 const CauroselSection = () => {
+  const { categories, loading } = useCategories();
+  if (loading) return <p>Loading categories...</p>;
+  if (!categories.length) return <p>No categories</p>;
   return (
     <Carousel opts={{ align: "center" }} className="max-w-screen overflow-hidden">
       <CarouselContent className="flex items-center">

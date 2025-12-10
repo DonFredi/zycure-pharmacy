@@ -1,3 +1,4 @@
+"use client";
 import SectionContainer from "@/components/section/SectionContainer";
 import { Button } from "@/components/ui/Button";
 import Title from "@/components/ui/Title";

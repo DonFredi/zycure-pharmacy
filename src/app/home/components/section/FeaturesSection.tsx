@@ -1,3 +1,4 @@
+"use client";
 import { features } from "@/data/features";
 import FeatureCard from "../card/FeatureCard";
 import SectionContainer from "@/components/section/SectionContainer";

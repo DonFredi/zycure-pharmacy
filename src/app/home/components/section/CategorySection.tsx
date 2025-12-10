@@ -1,3 +1,4 @@
+"use client";
 import Title from "@/components/ui/Title";
 import CauroselSection from "./CauroselSection";
 import SectionContainer from "@/components/section/SectionContainer";

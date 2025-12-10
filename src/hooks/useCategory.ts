@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
-import { Category } from "@/types/category";
+import { Category } from "@/types/categories";
 import { collection, getDocs } from "firebase/firestore";
 
 export function useCategories() {
@@ -16,10 +16,12 @@ export function useCategories() {
         const ref = collection(db, "categories");
         const snapshot = await getDocs(ref);
 
-        const list = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Category[];
+        const list: Category[] = snapshot.docs
+          .map((doc) => ({
+            ...(doc.data() as Omit<Category, "id">),
+            id: doc.id, // ✅ string
+          }))
+          .filter((c) => c.id);
 
         setCategories(list);
       } catch (err) {
