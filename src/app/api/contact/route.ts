@@ -11,9 +11,9 @@ export async function POST(request: Request) {
     }
 
     await resend.emails.send({
-      from: "Zycure Pharmacy <onboarding@resend.dev>",
+      from: name,
       to: process.env.CONTACT_EMAIL!,
-      subject: "New Contact Form Message",
+      subject: "New Message from ZyCure Pharmacy Website",
       replyTo: email,
       text: `
 Name: ${name}
