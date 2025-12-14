@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-export function useSingleProduct(id: string) {
+export function useProduct(id: string) {
   const [product, setProduct] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setLoading(false); // ✅ IMPORTANT
+      return;
+    }
 
     async function fetchProduct() {
       try {

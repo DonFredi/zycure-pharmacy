@@ -1,3 +1,4 @@
+"use client";
 import ProductsSection from "./components/section/ProductsSection";
 import CategoryBar from "./components/section/CategoryBar";
 import SectionContainer from "@/components/section/SectionContainer";

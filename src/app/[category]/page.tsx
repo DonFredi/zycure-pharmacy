@@ -1,5 +1,5 @@
 import { useProducts } from "@/hooks/useProducts";
-import ProductsSection from "../components/section/ProductsSection";
+import ProductsSection from "../products/components/section/ProductsSection";
 
 interface Props {
   params: { category: string };

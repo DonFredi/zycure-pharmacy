@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/Button";
 import { useCart } from "@/hooks/useCart";
 import { Product } from "@/types/products";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const { cart, addToCart } = useCart();
+  const { addToCart } = useCart();
 
   const handleAddCart = () => {
     addToCart({
@@ -15,8 +16,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       image: product.image,
     });
   };
-
-  const alreadyInCart = cart?.items?.some((item) => item.productId === product.id) ?? false;
+  // const alreadyInCart = cart?.items?.some((item) => item.productId === product.id) ?? false;
 
   return (
     <div className="w-[280px] h-fit flex flex-col  border rounded-sm">
@@ -27,12 +27,12 @@ const ProductCard = ({ product }: { product: Product }) => {
         <span>{product.category}</span>
         <span className="font-bold">{product.title}</span>
         <span className="text-primary font-semibold">{`Kshs ${product.price}`}</span>
-        <Button disabled={alreadyInCart} onClick={handleAddCart}>
-          {alreadyInCart ? "In Cart" : "Add to Cart"}
-        </Button>
-        <Button variant={"outline"} className="text-primary outline outline-primary">
-          View Product
-        </Button>
+        <Button onClick={handleAddCart}>Add to cart</Button>
+        <Link href={`/products/${product.id}`}>
+          <Button variant={"outline"} className="text-primary outline outline-primary">
+            View Product
+          </Button>
+        </Link>
       </div>
     </div>
   );

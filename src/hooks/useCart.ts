@@ -1,15 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { addDoc, collection, doc, updateDoc, serverTimestamp, getDoc } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { CartItem, CartProductItem } from "@/types/cartItem";
 
-const ACTIVE_CART_ID = "active_cart_id";
+const CART_STORAGE_KEY = "guest_cart";
 
 export function useCart() {
-  const [cart, setCart] = useState<CartItem | null>(null);
+  const [cart, setCart] = useState<CartItem>({
+    items: [],
+    totalQuantity: 0,
+    totalAmount: 0,
+  });
+
   const router = useRouter();
 
   /* ----------------------------------------
@@ -17,96 +22,44 @@ export function useCart() {
   -----------------------------------------*/
   const calculateTotals = (items: CartProductItem[]) => {
     const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
-
     const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
     return { totalQuantity, totalAmount };
   };
 
   /* ----------------------------------------
-     ✅ Restore cart on reload
+     ✅ Restore cart from localStorage
   -----------------------------------------*/
   useEffect(() => {
-    const restoreCart = async () => {
-      const storedCartId = localStorage.getItem(ACTIVE_CART_ID);
-      if (!storedCartId) return;
+    const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+    if (!storedCart) return;
 
-      const snap = await getDoc(doc(db, "cartItems", storedCartId));
+    const items: CartProductItem[] = JSON.parse(storedCart);
+    const totals = calculateTotals(items);
 
-      if (!snap.exists()) return;
-
-      const data = snap.data();
-
-      setCart({
-        id: snap.id,
-        clientId: data.clientPhone ?? null,
-        status: data.status,
-        items: data.items ?? [],
-        totalQuantity: data.totalQuantity ?? 0,
-        totalAmount: data.totalAmount ?? 0,
-      });
-    };
-
-    restoreCart();
+    setCart({
+      items,
+      ...totals,
+    });
   }, []);
 
   /* ----------------------------------------
-     ✅ Create or update cart
+     ✅ Persist cart to localStorage
   -----------------------------------------*/
-  const syncCart = async (items: CartProductItem[]) => {
-    const phone = localStorage.getItem("clientPhone");
-    const { totalQuantity, totalAmount } = calculateTotals(items);
+  const persistCart = (items: CartProductItem[]) => {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+    const totals = calculateTotals(items);
 
-    // 🆕 Create cart
-    if (!cart?.id) {
-      const docRef = await addDoc(collection(db, "cartItems"), {
-        clientPhone: phone,
-        status: "pending",
-        items,
-        totalQuantity,
-        totalAmount,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-      });
-
-      setCart({
-        id: docRef.id,
-        clientId: phone,
-        status: "pending",
-        items,
-        totalQuantity,
-        totalAmount,
-      });
-
-      localStorage.setItem(ACTIVE_CART_ID, docRef.id);
-      return;
-    }
-
-    // 🔁 Update existing cart
-    await updateDoc(doc(db, "cartItems", cart.id), {
+    setCart({
       items,
-      totalQuantity,
-      totalAmount,
-      updatedAt: serverTimestamp(),
+      ...totals,
     });
-
-    setCart((prev) =>
-      prev
-        ? {
-            ...prev,
-            items,
-            totalQuantity,
-            totalAmount,
-          }
-        : prev
-    );
   };
 
   /* ----------------------------------------
      ✅ Add product to cart
   -----------------------------------------*/
-  const addToCart = async (product: Omit<CartProductItem, "quantity">) => {
-    const existingItems = cart?.items ?? [];
+  const addToCart = (product: Omit<CartProductItem, "quantity">) => {
+    const existingItems = cart.items;
 
     const updatedItems = existingItems.some((item) => item.productId === product.productId)
       ? existingItems.map((item) =>
@@ -114,26 +67,48 @@ export function useCart() {
         )
       : [...existingItems, { ...product, quantity: 1 }];
 
-    await syncCart(updatedItems);
+    persistCart(updatedItems);
     router.push("/cart");
+  };
+
+  /* ----------------------------------------
+     ✅ Remove product
+  -----------------------------------------*/
+  const removeFromCart = (productId: string) => {
+    const updatedItems = cart.items.filter((item) => item.productId !== productId);
+    persistCart(updatedItems);
   };
 
   /* ----------------------------------------
      ✅ Clear cart after checkout
   -----------------------------------------*/
-  const clearCart = async () => {
-    if (!cart?.id) return;
-
-    await updateDoc(doc(db, "cartItems", cart.id), {
-      status: "checked_out",
+  const clearCart = () => {
+    localStorage.removeItem(CART_STORAGE_KEY);
+    setCart({
       items: [],
       totalQuantity: 0,
       totalAmount: 0,
-      updatedAt: serverTimestamp(),
+    });
+  };
+
+  /* ----------------------------------------
+     ✅ Submit order to Firestore
+  -----------------------------------------*/
+  const submitOrder = async (orderDetails: { customerName: string; phone: string; address?: string }) => {
+    if (cart.items.length === 0) return;
+
+    await addDoc(collection(db, "orders"), {
+      items: cart.items,
+      totalQuantity: cart.totalQuantity,
+      totalAmount: cart.totalAmount,
+      customer: orderDetails,
+      status: "pending",
+      isGuest: true,
+      createdAt: serverTimestamp(),
     });
 
-    setCart(null);
-    localStorage.removeItem(ACTIVE_CART_ID);
+    clearCart();
+    router.push("/order-success");
   };
 
   /* ----------------------------------------
@@ -141,11 +116,12 @@ export function useCart() {
   -----------------------------------------*/
   return {
     cart,
-    cartId: cart?.id,
-    items: cart?.items ?? [],
-    totalQuantity: cart?.totalQuantity ?? 0,
-    totalAmount: cart?.totalAmount ?? 0,
+    items: cart.items,
+    totalQuantity: cart.totalQuantity,
+    totalAmount: cart.totalAmount,
     addToCart,
+    removeFromCart,
     clearCart,
+    submitOrder,
   };
 }

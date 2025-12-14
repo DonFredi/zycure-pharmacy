@@ -1,6 +1,7 @@
 // lib/firebase.ts
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,3 +16,26 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
+
+export async function getProductById(id: string) {
+  if (!id) throw new Error("No product ID provided"); // <-- guard
+
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    throw new Error("Product not found");
+  }
+
+  const data = docSnap.data();
+  return {
+    id: docSnap.id,
+    title: data?.title || "",
+    price: data?.price || 0,
+    category: data?.category || "",
+    image: data?.image || "",
+    benefit: data?.benefit || "",
+    description: data?.description || "",
+    use: data?.use || "",
+  };
+}

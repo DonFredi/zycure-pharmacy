@@ -5,5 +5,6 @@ export interface Product {
   title: string;
   price: number;
   description: string;
+  benefit: string;
   use: string;
 }

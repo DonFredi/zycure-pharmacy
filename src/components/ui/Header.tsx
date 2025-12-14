@@ -6,6 +6,7 @@ import Cart from "../icons/Cart";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Menu from "../icons/Menu";
+import Link from "next/link";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,8 +23,9 @@ const Header = () => {
           <NavLink href="/products" label="Products" />
           <NavLink href="/contacts" label="Contact" />
         </nav>
-
-        <Cart className="text-primary" />
+        <Link className="text-primary" href={"/cart"}>
+          <Cart />
+        </Link>
       </header>
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       {isOpen && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setIsOpen(false)} />}
