@@ -29,7 +29,7 @@ export function useProducts(category?: string) {
               id: doc.id,
             };
           })
-          .filter((p): p is Product => p !== null); // type guard
+          .filter((p): p is Product => p !== null);
 
         setProducts(list || []);
         console.log("Fetched products:", list);
