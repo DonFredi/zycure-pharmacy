@@ -2,12 +2,15 @@
 import ProductCard from "@/app/products/components/card/ProductCard";
 import SectionContainer from "@/components/section/SectionContainer";
 import Title from "@/components/ui/Title";
-import { useProducts } from "@/hooks/useProducts";
+import { Product } from "@/types/products";
 import { MoveRight } from "lucide-react";
 import Link from "next/link";
 
-const ProductSection = () => {
-  const { products } = useProducts();
+interface ProductsSectionProps {
+  products: Product[];
+}
+
+const ProductSection = ({ products }: ProductsSectionProps) => {
   return (
     <SectionContainer>
       <div className="flex flex-row justify-between gap-6 p-2 items-center">
