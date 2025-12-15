@@ -1,12 +1,11 @@
 "use client";
 import { Product } from "@/types/products";
 import ProductCard from "../card/ProductCard";
-import { useProducts } from "@/hooks/useProducts";
 
-const ProductsSection = () => {
-  const { products, loading } = useProducts();
-
-  if (loading) return <p>Loading products...</p>;
+interface ProductsSectionProps {
+  products: Product[];
+}
+const ProductsSection = ({ products }: ProductsSectionProps) => {
   if (!products?.length) return <p>No products available</p>;
 
   return (
