@@ -1,13 +1,14 @@
 // lib/getProductById.ts
-import { adminDb } from "./firebaseAdmin";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebaseClient";
 import { Product } from "@/types/products";
 
 export async function getProductById(id: string): Promise<Product | null> {
   if (!id) return null;
 
-  const docRef = adminDb.doc(`products/${id}`);
-  const snap = await docRef.get(); // ✅ correct for admin SDK
-
+  // Example: Get a single product
+  const ref = doc(db, "products", id);
+  const snap = await getDoc(ref);
   if (!snap.exists) return null;
 
   return {
