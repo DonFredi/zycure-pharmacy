@@ -6,6 +6,8 @@ import ArrowDown from "../icons/ArrowDown";
 import ArrowUp from "../icons/ArrowUp";
 import Cancel from "../icons/Cancel";
 import Logo from "./Logo";
+import { useCategories } from "@/hooks/useCategory";
+import Copyright from "../icons/Copyright";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -14,6 +16,9 @@ type SidebarProps = {
 
 const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
   const [openProducts, setOpenProducts] = useState(true);
+  const { categories } = useCategories();
+  const date = new Date();
+  const year = date.getFullYear();
 
   return (
     <div
@@ -43,35 +48,28 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
           <span className="transition-transform duration-300">{openProducts ? <ArrowUp /> : <ArrowDown />}</span>
         </button>
 
-        {/* DROPDOWN WITH SLIDE ANIMATION */}
         <div
           className={`
-              ml-4 flex flex-col gap-2 text-sm overflow-hidden 
-              transition-all duration-300 ease-in-out
-              ${openProducts ? "max-h-40 opacity-100" : "max-h-0 opacity-0"}
-            `}
+            ml-4 flex flex-col gap-2 text-sm overflow-hidden 
+            transition-all duration-300 ease-in-out
+            ${openProducts ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
+          `}
         >
-          <Link href="/products/mom-and-child" className="hover:text-primary">
-            Mom & Child
-          </Link>
-          <Link href="/products/supplements" className="hover:text-primary">
-            Supplements
-          </Link>
-          <Link href="/products/prescriptions" className="hover:text-primary">
-            Prescriptions
-          </Link>
-          <Link href="/products/beauty" className="hover:text-primary">
-            Beauty
-          </Link>
-          <Link href="/products/medical-equipment" className="hover:text-primary">
-            Devices & Diagnostics
-          </Link>
+          {categories.map((cat) => (
+            <Link key={cat.id} href={`/products/${cat.slug}`} className="hover:text-primary">
+              {cat.title}
+            </Link>
+          ))}
         </div>
 
         <li>
           <a href="/contacts">Contact</a>
         </li>
       </ul>
+      <p className="text-foreground flex flex-row text-wrap items-center">
+        <Copyright />
+        {year} ZyCure Pharmacy.All Rights Reserved.
+      </p>
     </div>
   );
 };
