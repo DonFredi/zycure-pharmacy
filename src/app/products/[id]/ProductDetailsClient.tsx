@@ -21,7 +21,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
 
   const handleAddCart = () => {
     addToCart({
-      productId: product.id,
+      id: product.id,
       title: product.title,
       price: product.price,
       image: product.image,

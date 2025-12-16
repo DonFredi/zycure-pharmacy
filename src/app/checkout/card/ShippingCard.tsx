@@ -120,7 +120,7 @@ const ShippingCard = () => {
         <h3 className="font-semibold mb-3">Order Summary</h3>
 
         {cart.items.map((item) => (
-          <div key={item.productId} className="flex  flex-row justify-between border border-foreground p-4 rounded-sm">
+          <div key={item.id} className="flex  flex-row justify-between border border-foreground p-4 rounded-sm">
             <p>
               {item.title} × {item.quantity}
             </p>

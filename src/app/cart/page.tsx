@@ -39,10 +39,7 @@ const CartPage = () => {
       {/* CART ITEMS */}
       <div className="space-y-4">
         {cart.items.map((item) => (
-          <div
-            key={item.productId}
-            className="flex items-center justify-between border p-4 rounded-sm border-foreground"
-          >
+          <div key={item.id} className="flex items-center justify-between border p-4 rounded-sm border-foreground">
             <div>
               <p className="font-semibold">{item.title}</p>
               <p className="text-sm">
@@ -51,7 +48,7 @@ const CartPage = () => {
             </div>
 
             <p className="font-bold">KES {item.price * item.quantity}</p>
-            <button onClick={() => removeFromCart(item.productId)}>
+            <button onClick={() => removeFromCart(item.id)}>
               <Cancel />
             </button>
           </div>

@@ -60,10 +60,8 @@ export function useCart() {
   -----------------------------------------*/
   const addToCart = (product: Omit<CartProductItem, "quantity">, quantity: number = 1) => {
     const existingItems = cart.items;
-    const updatedItems = existingItems.some((item) => item.productId === product.productId)
-      ? existingItems.map((item) =>
-          item.productId === product.productId ? { ...item, quantity: item.quantity + quantity } : item
-        )
+    const updatedItems = existingItems.some((item) => item.id === product.id)
+      ? existingItems.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item))
       : [...existingItems, { ...product, quantity }];
 
     persistCart(updatedItems);
@@ -74,7 +72,7 @@ export function useCart() {
      ✅ Remove product
   -----------------------------------------*/
   const removeFromCart = (productId: string) => {
-    const updatedItems = cart.items.filter((item) => item.productId !== productId);
+    const updatedItems = cart.items.filter((item) => item.id !== productId);
     persistCart(updatedItems);
   };
 

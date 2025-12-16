@@ -1,5 +1,5 @@
 export type CartProductItem = {
-  productId: string; // products collection ID
+  id: string; // products collection ID
   title: string;
   price: number;
   quantity: number;

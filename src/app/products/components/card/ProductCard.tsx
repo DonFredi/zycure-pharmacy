@@ -10,7 +10,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   const handleAddCart = () => {
     addToCart({
-      productId: product.id,
+      id: product.id,
       title: product.title,
       price: product.price,
       image: product.image,

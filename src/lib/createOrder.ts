@@ -1,15 +1,22 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebaseClient";
+import { CartProductItem } from "@/types/cartItem";
 
-async function createOrder(formData, cartItems, total) {
+interface OrderFormData {
+  name: string;
+  phone: string;
+  location?: string;
+  email: string;
+}
+async function createOrder(formData: OrderFormData, cartItems: CartProductItem[], total: number) {
   const order = {
     clientName: formData.name,
     clientPhone: formData.phone, // ✅ client ID
     email: formData.email,
-    location: formData.location,
+    location: formData.location || "",
     items: cartItems.map((item) => ({
       productId: item.id,
-      name: item.name,
+      title: item.title,
       price: item.price,
       quantity: item.quantity,
     })),
