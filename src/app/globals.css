@@ -172,9 +172,6 @@
   }
 }
 
-.upper {
-  padding: 2px;
-}
 @theme inline {
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
