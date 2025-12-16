@@ -56,13 +56,13 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
       <SectionContainer className="flex flex-col gap-6 p-4">
         <div className="flex gap-4">
           <button
-            className={`${activeTab === "description" ? "underline text-primary" : "no-underline"}`}
+            className={`${activeTab === "description" ? " text-primary" : "no-underline"}`}
             onClick={() => setActiveTab("description")}
           >
             Description
           </button>
           <button
-            className={`${activeTab === "use" ? "underline text-primary" : "no-underline"}`}
+            className={`${activeTab === "use" ? " text-primary" : "no-underline"}`}
             onClick={() => setActiveTab("use")}
           >
             How to Use

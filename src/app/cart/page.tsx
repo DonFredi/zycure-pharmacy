@@ -23,12 +23,12 @@ const CartPage = () => {
   // ✅ Empty cart
   if (cart.items.length === 0) {
     return (
-      <div className="max-w-3xl h-40 mx-auto border border-foreground flex flex-col items-center justify-center">
+      <div className="w-3/4 h-40 mx-auto border border-foreground flex flex-col items-center justify-around rounded-sm">
         {" "}
-        <p>NO ITEMS IN THE CART</p>
-        <Button onClick={goBack} variant={"default"}>
-          BACK
-        </Button>
+        <p className="font-bold">NO ITEMS IN THE CART</p>
+        <button onClick={goBack} className="text-primary hover:underline">
+          Go back to previous page
+        </button>
       </div>
     );
   }

@@ -59,12 +59,16 @@ export function useCart() {
      ✅ Add product to cart
   -----------------------------------------*/
   const addToCart = (product: Omit<CartProductItem, "quantity">, quantity: number = 1) => {
-    const existingItems = cart.items;
-    const updatedItems = existingItems.some((item) => item.id === product.id)
-      ? existingItems.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item))
-      : [...existingItems, { ...product, quantity }];
+    setCart((prev) => {
+      const updatedItems = prev.items.some((item) => item.id === product.id)
+        ? prev.items.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item))
+        : [...prev.items, { ...product, quantity }];
 
-    persistCart(updatedItems);
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(updatedItems));
+
+      return { items: updatedItems, ...calculateTotals(updatedItems) };
+    });
+
     router.push("/cart");
   };
 
@@ -72,8 +76,16 @@ export function useCart() {
      ✅ Remove product
   -----------------------------------------*/
   const removeFromCart = (productId: string) => {
-    const updatedItems = cart.items.filter((item) => item.id !== productId);
-    persistCart(updatedItems);
+    setCart((prev) => {
+      const updatedItems = prev.items.filter((item) => item.id !== productId);
+
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(updatedItems));
+
+      return {
+        items: updatedItems,
+        ...calculateTotals(updatedItems),
+      };
+    });
   };
 
   /* ----------------------------------------

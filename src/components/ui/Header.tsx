@@ -7,9 +7,11 @@ import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Menu from "../icons/Menu";
 import Link from "next/link";
+import { useCart } from "@/hooks/useCart";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { totalQuantity } = useCart();
 
   return (
     <>
@@ -23,9 +25,18 @@ const Header = () => {
           <NavLink href="/products" label="Products" />
           <NavLink href="/contacts" label="Contact" />
         </nav>
-        <Link className="text-primary" href={"/cart"}>
-          <Cart />
-        </Link>
+        <div className="relative">
+          <Link className="text-primary relative" href={"/cart"}>
+            <Cart />
+          </Link>
+          <div
+            className={`absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold text-white ${
+              totalQuantity > 0 ? "bg-red-500" : "bg-primary"
+            }`}
+          >
+            {totalQuantity}
+          </div>
+        </div>
       </header>
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       {isOpen && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setIsOpen(false)} />}
