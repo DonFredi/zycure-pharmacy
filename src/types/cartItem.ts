@@ -16,3 +16,8 @@ export type CartItem = {
   createdAt?: any;
   updatedAt?: any;
 };
+export type ClientCart = {
+  items: CartProductItem[];
+  totalQuantity: number;
+  totalAmount: number;
+};

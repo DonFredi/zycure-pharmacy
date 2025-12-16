@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db } from "@/lib/firebaseClient";
 import { useRouter } from "next/navigation";
-import { CartItem, CartProductItem } from "@/types/cartItem";
+import { CartProductItem, ClientCart } from "@/types/cartItem";
 
 const CART_STORAGE_KEY = "guest_cart";
 
 export function useCart() {
-  const [cart, setCart] = useState<CartItem>({
+  const [cart, setCart] = useState<ClientCart>({
     items: [],
     totalQuantity: 0,
     totalAmount: 0,

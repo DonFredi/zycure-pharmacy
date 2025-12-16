@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { db } from "@/lib/firebase";
+import { db } from "@/lib/firebaseClient";
 import { doc, getDoc } from "firebase/firestore";
+import { Product } from "@/types/products";
 
 export function useProduct(id: string) {
-  const [product, setProduct] = useState<any | null>(null);
+  const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     if (!id) {
-      setLoading(false); // ✅ IMPORTANT
+      setLoading(false);
       return;
     }
 
@@ -20,12 +23,16 @@ export function useProduct(id: string) {
         const snapshot = await getDoc(ref);
 
         if (snapshot.exists()) {
-          setProduct({ id: snapshot.id, ...snapshot.data() });
+          setProduct({
+            id: snapshot.id,
+            ...(snapshot.data() as Omit<Product, "id">),
+          });
         } else {
           setProduct(null);
         }
       } catch (error) {
         console.error("Error fetching product:", error);
+        setProduct(null);
       } finally {
         setLoading(false);
       }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db } from "@/lib/firebaseClient";
 import { useCart } from "@/hooks/useCart";
 import { Order } from "@/types/order";
 

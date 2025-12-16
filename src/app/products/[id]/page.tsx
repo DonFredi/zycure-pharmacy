@@ -1,23 +1,28 @@
+import { Product } from "@/types/products";
 import ProductDetailsClient from "./ProductDetailsClient";
-import { getProductById } from "@/lib/firebase";
+import { getProductById } from "@/lib/getProductById";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebaseClient";
 
 interface PageProps {
-  params: { id: string };
+  params: { id: string } | Promise<{ id: string }>;
 }
 
 export default async function ProductPage({ params }: PageProps) {
-  const resolvedParams = await params;
-  const { id } = resolvedParams;
+  // Unwrap params if it is a promise
+  const { id } = params instanceof Promise ? await params : params;
 
-  if (!id) return <div>Product ID not provided</div>;
+  const ref = doc(db, "products", id);
+  const snap = await getDoc(ref);
 
-  let product = null;
-  try {
-    product = await getProductById(id);
-  } catch (err) {
-    console.error(err);
+  if (!snap.exists()) {
     return <div>Product not found</div>;
   }
+
+  const product: Product = {
+    id: snap.id,
+    ...(snap.data() as Omit<Product, "id">),
+  };
 
   return <ProductDetailsClient product={product} />;
 }
