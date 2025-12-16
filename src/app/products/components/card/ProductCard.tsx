@@ -10,16 +10,20 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   const handleAddCart = () => {
     addToCart({
-      productId: product.id, // ✅ SAME ID as products collection
+      productId: product.id,
       title: product.title,
       price: product.price,
       image: product.image,
+      category: product.category,
+      benefit: product.benefit,
+      description: product.description,
+      use: product.use,
     });
   };
   // const alreadyInCart = cart?.items?.some((item) => item.productId === product.id) ?? false;
 
   return (
-    <div className="w-[280px] h-fit flex flex-col  border rounded-sm">
+    <div className="w-70 h-fit flex flex-col  border rounded-sm">
       <div className="border-b-2 flex w-full h-auto">
         <Image src={product.image} alt={product.title} width={300} height={240} />
       </div>

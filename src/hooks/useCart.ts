@@ -58,14 +58,13 @@ export function useCart() {
   /* ----------------------------------------
      ✅ Add product to cart
   -----------------------------------------*/
-  const addToCart = (product: Omit<CartProductItem, "quantity">) => {
+  const addToCart = (product: Omit<CartProductItem, "quantity">, quantity: number = 1) => {
     const existingItems = cart.items;
-
     const updatedItems = existingItems.some((item) => item.productId === product.productId)
       ? existingItems.map((item) =>
-          item.productId === product.productId ? { ...item, quantity: item.quantity + 1 } : item
+          item.productId === product.productId ? { ...item, quantity: item.quantity + quantity } : item
         )
-      : [...existingItems, { ...product, quantity: 1 }];
+      : [...existingItems, { ...product, quantity }];
 
     persistCart(updatedItems);
     router.push("/cart");

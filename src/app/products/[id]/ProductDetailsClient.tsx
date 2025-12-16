@@ -8,15 +8,29 @@ import { useState } from "react";
 import RelatedProductsSection from "../components/section/RelatedProductsSection";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import QuantitySelector from "@/components/ui/QuantitySelector";
+import { useCart } from "@/hooks/useCart";
 
 interface ProductDetailsProps {
   product: Product;
 }
 
 export default function ProductDetailsClient({ product }: ProductDetailsProps) {
+  const { addToCart } = useCart();
   const [activeTab, setActiveTab] = useState<"description" | "use">("description");
   const [quantity, setQuantity] = useState(1);
 
+  const handleAddCart = () => {
+    addToCart({
+      productId: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      category: product.category,
+      benefit: product.benefit,
+      description: product.description,
+      use: product.use,
+    });
+  };
   if (!product) return <div>Product not found</div>;
   console.log(product);
   console.log(quantity);
@@ -34,7 +48,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
           <p>{product.benefit}</p>
           <div className="flex flex-row justify-start gap-2 ">
             <QuantitySelector initialQuantity={1} min={1} max={10} onChange={(qty) => setQuantity(qty)} />
-            <Button>Add to cart</Button>
+            <Button onClick={handleAddCart}>Add to cart</Button>
           </div>
         </div>
       </SectionContainer>
