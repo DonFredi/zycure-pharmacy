@@ -3,7 +3,7 @@ import { contacts } from "@/data/contacts";
 
 const GetInTouch = () => {
   return (
-    <div className="p-3 max-w-[525px] gap-5 flex flex-col items-left">
+    <div className="p-3 max-w-131.25 gap-5 flex flex-col items-left">
       <Title
         text="Get in touch"
         as="h2"

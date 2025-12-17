@@ -1,12 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import ArrowDown from "../icons/ArrowDown";
-import ArrowUp from "../icons/ArrowUp";
 import Cancel from "../icons/Cancel";
 import Logo from "./Logo";
-import { useCategories } from "@/hooks/useCategory";
 import Copyright from "../icons/Copyright";
 
 type SidebarProps = {
@@ -15,8 +10,6 @@ type SidebarProps = {
 };
 
 const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
-  const [openProducts, setOpenProducts] = useState(true);
-  const { categories } = useCategories();
   const date = new Date();
   const year = date.getFullYear();
 
@@ -40,27 +33,9 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
         <li>
           <a href="/">Home</a>
         </li>
-        <button
-          className={`flex justify-between items-center py-2 hover:text-primary ${openProducts ? "py-2" : "py-0"}`}
-          onClick={() => setOpenProducts(!openProducts)}
-        >
-          <span>Products</span>
-          <span className="transition-transform duration-300">{openProducts ? <ArrowUp /> : <ArrowDown />}</span>
-        </button>
-
-        <div
-          className={`
-            ml-4 flex flex-col gap-2 text-sm overflow-hidden 
-            transition-all duration-300 ease-in-out
-            ${openProducts ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
-          `}
-        >
-          {categories.map((cat) => (
-            <Link key={cat.id} href={`/products/${cat.slug}`} className="hover:text-primary">
-              {cat.title}
-            </Link>
-          ))}
-        </div>
+        <li>
+          <a href="/products">Products</a>
+        </li>
 
         <li>
           <a href="/contacts">Contact</a>

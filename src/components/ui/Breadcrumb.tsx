@@ -16,7 +16,7 @@ const Breadcrumb = ({ lastLabel }: BreadcrumbProps) => {
   const segments = pathname.split("/").filter(Boolean);
 
   return (
-    <nav className="text-sm text-gray-600">
+    <nav className="text-sm text-foreground mb-2">
       <ol className="flex items-center gap-1">
         <li>
           <Link href="/" className="hover:text-black">

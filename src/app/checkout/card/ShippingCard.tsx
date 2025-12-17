@@ -35,7 +35,7 @@ const ShippingCard = () => {
   if (orderId) {
     return (
       <div className="w-3/4 h-40 mx-auto border border-foreground flex flex-col items-center justify-around rounded-sm">
-        <h2 className="text-xl font-bold">✅ Order placed successfully</h2>
+        <h2 className="text-xl font-bold">Order placed successfully</h2>
         Order ID: <strong>{orderId}</strong>
         <button onClick={goBack} className="text-primary hover:underline">
           Go back to previous page
