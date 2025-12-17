@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/hooks/useCart";
 import { useOrder } from "@/hooks/useOrder";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const ShippingCard = () => {
@@ -13,6 +14,11 @@ const ShippingCard = () => {
   const [location, setLocation] = useState("");
   const [email, setEmail] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<"mpesa" | "cash">("mpesa");
+  const router = useRouter();
+
+  const goBack = () => {
+    router.back(); // navigates to the previous page
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,11 +34,12 @@ const ShippingCard = () => {
 
   if (orderId) {
     return (
-      <div className="text-center mt-10">
+      <div className="w-3/4 h-40 mx-auto border border-foreground flex flex-col items-center justify-around rounded-sm">
         <h2 className="text-xl font-bold">✅ Order placed successfully</h2>
-        <p className="mt-2">
-          Order ID: <strong>{orderId}</strong>
-        </p>
+        Order ID: <strong>{orderId}</strong>
+        <button onClick={goBack} className="text-primary hover:underline">
+          Go back to previous page
+        </button>
       </div>
     );
   }

@@ -8,7 +8,7 @@ const CauroselSection = () => {
   if (loading) return <p>Loading categories...</p>;
   if (!categories.length) return <p>No categories</p>;
   return (
-    <Carousel opts={{ align: "center" }} className="max-w-screen overflow-hidden">
+    <Carousel opts={{ align: "center" }} className="w-full overflow-hidden">
       <CarouselContent className="flex items-center">
         {categories.map((category) => (
           <CarouselItem
@@ -26,8 +26,8 @@ const CauroselSection = () => {
         ))}
       </CarouselContent>
 
-      <CarouselPrevious className="left-2 -translate-x-4 z-20 bg-white/80 shadow-md hover:bg-white rounded-full" />
-      <CarouselNext className="right-2 translate-x-4 z-20 bg-white/80 shadow-md hover:bg-white rounded-full" />
+      <CarouselPrevious className="left-2 z-20 bg-white/80 shadow-md hover:bg-white rounded-full" />
+      <CarouselNext className="right-2 z-20 bg-white/80 shadow-md hover:bg-white rounded-full" />
     </Carousel>
   );
 };

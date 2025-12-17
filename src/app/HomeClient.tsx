@@ -8,6 +8,7 @@ import TrendingProducts from "./home/components/section/TrendingProducts";
 import SpecialOffersSection from "./home/components/section/SpecialOffersSection";
 import ContactSection from "./contacts/components/section/ContactSection";
 import { useProducts } from "@/hooks/useProducts";
+import PageContainer from "@/components/pages/PageContainer";
 
 const HomeClient = () => {
   const { products, loading } = useProducts();
@@ -16,7 +17,7 @@ const HomeClient = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div>
+    <PageContainer>
       <Hero />
       <FeaturesSection />
       <CTASection />
@@ -25,7 +26,7 @@ const HomeClient = () => {
       <TrendingProducts />
       <SpecialOffersSection />
       <ContactSection />
-    </div>
+    </PageContainer>
   );
 };
 export default HomeClient;
