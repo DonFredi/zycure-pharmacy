@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/hooks/useCart";
 import { useOrder } from "@/hooks/useOrder";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const ShippingCard = () => {
