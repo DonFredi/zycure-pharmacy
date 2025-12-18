@@ -12,7 +12,7 @@ const ProductsClient = () => {
 
   if (loading) return <p>Loading products...</p>;
   return (
-    <div className="flex flex-col md:flex-row w-full justify-start gap-2">
+    <div className="flex flex-col md:flex-row w-full justify-start">
       <div className="flex-col justify-start gap-2">
         <Breadcrumb />
         <CategoryBar onSelect={setCategory} />

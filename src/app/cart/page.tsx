@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Cancel from "@/components/icons/Cancel";
 import { useCart } from "@/hooks/useCart";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 
 const CartPage = () => {
   const { cart, totalAmount, totalQuantity, removeFromCart } = useCart();
@@ -40,14 +41,15 @@ const CartPage = () => {
       <div className="space-y-4">
         {cart.items.map((item) => (
           <div key={item.id} className="flex items-center justify-between border p-4 rounded-sm border-foreground">
+            <Image src={item.image} alt={item.title} width={50} height={100} />
             <div>
               <p className="font-semibold">{item.title}</p>
               <p className="text-sm">
                 KES {item.price} × {item.quantity}
               </p>
+              <p className="font-bold">KES {item.price * item.quantity}</p>
             </div>
 
-            <p className="font-bold">KES {item.price * item.quantity}</p>
             <button onClick={() => removeFromCart(item.id)}>
               <Cancel />
             </button>

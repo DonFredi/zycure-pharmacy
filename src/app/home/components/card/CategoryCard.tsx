@@ -6,7 +6,7 @@ const CategoryCard = ({ imageSrc, title }: Category) => {
   return (
     <div className="px-4 py-2 flex flex-col items-center">
       {imageSrc && <Image src={imageSrc} alt="category-image" width={88} height={88} />}
-      <Title text={title} as="h3" size="lg" align="center" color="text-foreground" className="font-light text-wrap" />
+      <Title text={title} as="h3" size="lg" align="center" color="text-foreground" className="text-wrap" />
     </div>
   );
 };

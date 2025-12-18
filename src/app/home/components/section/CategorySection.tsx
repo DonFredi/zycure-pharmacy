@@ -12,7 +12,7 @@ const CategorySection = () => {
         size="xxl"
         align="center"
         color="text-foreground"
-        className="text-xl font-bold"
+        className="text-xl font-bold mb-6"
       />
       <CauroselSection />
     </SectionContainer>

@@ -6,7 +6,7 @@ export type CartProductItem = {
   category: string;
   benefit: string;
   description: string;
-  image?: string;
+  image: string;
   use: string;
 };
 export type CartItem = {

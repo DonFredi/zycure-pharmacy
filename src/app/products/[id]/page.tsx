@@ -1,6 +1,5 @@
 import { Product } from "@/types/products";
 import ProductDetailsClient from "./ProductDetailsClient";
-import { getProductById } from "@/lib/getProductById";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebaseClient";
 

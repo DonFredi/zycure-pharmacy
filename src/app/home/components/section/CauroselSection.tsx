@@ -9,7 +9,7 @@ const CauroselSection = () => {
   if (!categories.length) return <p>No categories</p>;
   return (
     <Carousel opts={{ align: "center" }} className="w-full overflow-hidden">
-      <CarouselContent className="flex items-center">
+      <CarouselContent className="flex items-center justify-center">
         {categories.map((category) => (
           <CarouselItem
             key={category.id}

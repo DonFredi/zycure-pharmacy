@@ -9,6 +9,7 @@ import RelatedProductsSection from "../components/section/RelatedProductsSection
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import QuantitySelector from "@/components/ui/QuantitySelector";
 import { useCart } from "@/hooks/useCart";
+import PageContainer from "@/components/pages/PageContainer";
 
 interface ProductDetailsProps {
   product: Product;
@@ -35,7 +36,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
   console.log(product);
   console.log(quantity);
   return (
-    <div>
+    <PageContainer>
       <Breadcrumb lastLabel={product.title} />
       <SectionContainer className="flex flex-col md:flex-row gap-2 py-4">
         <div>
@@ -53,14 +54,15 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
         </div>
       </SectionContainer>
 
-      <SectionContainer className="flex flex-col gap-6 p-4">
-        <div className="flex gap-4">
+      <SectionContainer className="flex flex-col gap-6">
+        <div className="flex gap-2">
           <button
             className={`${activeTab === "description" ? " text-primary" : "no-underline"}`}
             onClick={() => setActiveTab("description")}
           >
             Description
           </button>
+          |
           <button
             className={`${activeTab === "use" ? " text-primary" : "no-underline"}`}
             onClick={() => setActiveTab("use")}
@@ -70,12 +72,12 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
         </div>
 
         <div className="mt-2">
-          {activeTab === "description" && <p>{product.description}</p>}
-          {activeTab === "use" && <p>{product.use}</p>}
+          {activeTab === "description" && <p className="leading relaxed">{product.description}</p>}
+          {activeTab === "use" && <p className="leading relaxed">{product.use}</p>}
         </div>
 
         <RelatedProductsSection />
       </SectionContainer>
-    </div>
+    </PageContainer>
   );
 }

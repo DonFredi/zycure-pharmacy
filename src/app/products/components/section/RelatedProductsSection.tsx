@@ -9,19 +9,19 @@ import Link from "next/link";
 export default function RelatedProductsSection() {
   const { products } = useProducts();
   return (
-    <SectionContainer>
-      <div className="flex flex-row justify-between gap-6 p-2 items-center">
+    <SectionContainer className="flex flex-col gap-4">
+      <div className="flex flex-row justify-between items-center">
         <Title
           text="Related Products"
           as="h2"
-          size="xxl"
+          size="lg"
           align="left"
           color="text-foreground"
           className="text-xl font-bold"
         />
         <Link href="/products" className="text-primary hover:underline flex flex-row gap-1 items-center">
           {" "}
-          View More Products
+          View More
           <MoveRight />
         </Link>
       </div>
