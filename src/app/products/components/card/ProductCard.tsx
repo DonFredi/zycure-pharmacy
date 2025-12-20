@@ -8,7 +8,9 @@ import Link from "next/link";
 const ProductCard = ({ product }: { product: Product }) => {
   const { addToCart } = useCart();
 
-  const handleAddCart = () => {
+  const handleAddCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     addToCart({
       id: product.id,
       title: product.title,
@@ -23,7 +25,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   // const alreadyInCart = cart?.items?.some((item) => item.productId === product.id) ?? false;
 
   return (
-    <a href={`/products/${product.id}`} className="w-70 h-fit flex flex-col  border-color rounded-sm">
+    <Link href={`/products/${product.id}`} className="w-70 h-fit flex flex-col  border-color rounded-sm">
       <div className="flex w-full h-auto">
         <Image src={product.image} alt={product.title} width={300} height={240} />
       </div>
@@ -33,7 +35,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <span className="text-primary font-semibold">{`Kshs ${product.price}`}</span>
         <Button onClick={handleAddCart}>Add to cart</Button>
       </div>
-    </a>
+    </Link>
   );
 };
 export default ProductCard;
