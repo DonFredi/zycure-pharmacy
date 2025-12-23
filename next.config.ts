@@ -9,9 +9,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "firebasestorage.googleapis.com",
+        hostname: "res.cloudinary.com",
         port: "", // usually empty
         pathname: "/**", // allow all paths under this hostname
+      },
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
       },
     ],
   },

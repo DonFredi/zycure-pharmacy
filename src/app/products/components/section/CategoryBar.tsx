@@ -14,7 +14,7 @@ const CategoryBar = ({ onSelect }: CategoryBarProps) => {
   return (
     <div className="hidden md:flex flex-col justify-start gap-6 w-67.5">
       {categories.map((category) => (
-        <CategoryDrop key={category.id} {...category} onClick={() => onSelect(category.title)} />
+        <CategoryDrop key={category.id} {...category} onClick={() => onSelect(category.name)} />
       ))}
     </div>
   );
