@@ -3,10 +3,13 @@ export type CartProductItem = {
   title: string;
   price: number;
   quantity: number;
-  category: string;
+  categoryId: string;
   benefit: string;
   description: string;
-  image: string;
+  imageSrc?: {
+    url: string;
+    publicId: string | null;
+  } | null;
   use: string;
 };
 export type CartItem = {

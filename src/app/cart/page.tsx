@@ -41,7 +41,7 @@ const CartPage = () => {
       <div className="space-y-4">
         {cart.items.map((item) => (
           <div key={item.id} className="flex items-center justify-between border p-4 rounded-sm border-foreground">
-            <Image src={item.image} alt={item.title} width={50} height={100} />
+            <Image src={item.imageSrc?.url || "/placeholder.png"} alt={item.title} width={50} height={100} />
             <div>
               <p className="font-semibold">{item.title}</p>
               <p className="text-sm">

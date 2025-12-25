@@ -13,29 +13,38 @@ export function useProducts(category?: string) {
     async function fetchProducts() {
       try {
         setLoading(true);
+
         const productsRef = collection(db, "products");
-        const q = category ? query(productsRef, where("category", "==", category)) : productsRef;
+        const q = category ? query(productsRef, where("categoryId", "==", category)) : productsRef;
 
         const snapshot = await getDocs(q);
-        console.log("Firestore project:", db.app.options.projectId);
-        console.log("Docs count:", snapshot.size);
+
         const list: Product[] = snapshot.docs.map((doc) => {
-          const data = doc.data() as Omit<Product, "id">;
+          const data = doc.data();
 
           return {
             id: doc.id,
-            title: data.title || "",
+            title: data.title ?? "",
             price: data.price ?? 0,
-            image: data.image || "",
-            category: data.category || "",
-            benefit: data.benefit || "",
-            description: data.description || "",
-            use: data.use || "",
+            categoryId: data.categoryId ?? "",
+
+            imageSrc: data.imageSrc
+              ? {
+                  url: data.imageSrc.url ?? "",
+                  publicId: data.imageSrc.publicId ?? "",
+                }
+              : null,
+
+            description: data.description ?? "",
+            benefit: data.benefit ?? "",
+            use: data.use ?? "",
+
+            createdAt: data.createdAt?.toDate?.().toISOString() ?? null,
+            updatedAt: data.updatedAt?.toDate?.().toISOString() ?? null,
           };
         });
 
         setProducts(list);
-        console.log("Fetched products:", list);
       } catch (error) {
         console.error("Error fetching products:", error);
         setProducts([]);
@@ -43,6 +52,7 @@ export function useProducts(category?: string) {
         setLoading(false);
       }
     }
+
     fetchProducts();
   }, [category]);
 

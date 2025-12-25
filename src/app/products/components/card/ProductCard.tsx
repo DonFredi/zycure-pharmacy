@@ -15,8 +15,8 @@ const ProductCard = ({ product }: { product: Product }) => {
       id: product.id,
       title: product.title,
       price: product.price,
-      image: product.image,
-      category: product.category,
+      imageSrc: product.imageSrc ?? null,
+      categoryId: product.categoryId,
       benefit: product.benefit,
       description: product.description,
       use: product.use,
@@ -27,10 +27,16 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Link href={`/products/${product.id}`} className="w-70 h-fit flex flex-col  border-color rounded-sm">
       <div className="flex w-full h-auto">
-        <Image src={product.image} alt={product.title} width={300} height={240} />
+        <Image
+          src={product.imageSrc?.url || "/placeholder.png"}
+          alt={product.title}
+          width={300}
+          height={240}
+          className="object-cover"
+        />
       </div>
       <div className="flex flex-col items-center gap-2 px-4 py-2 h-fit">
-        <span>{product.category}</span>
+        <span>{product.categoryId}</span>
         <span className="font-bold">{product.title}</span>
         <span className="text-primary font-semibold">{`Kshs ${product.price}`}</span>
         <Button onClick={handleAddCart}>Add to cart</Button>

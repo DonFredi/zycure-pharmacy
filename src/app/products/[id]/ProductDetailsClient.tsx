@@ -25,8 +25,8 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
       id: product.id,
       title: product.title,
       price: product.price,
-      image: product.image,
-      category: product.category,
+      imageSrc: product.imageSrc ?? null,
+      categoryId: product.categoryId,
       benefit: product.benefit,
       description: product.description,
       use: product.use,
@@ -40,10 +40,10 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
       <Breadcrumb lastLabel={product.title} />
       <SectionContainer className="flex flex-col md:flex-row gap-2 py-4">
         <div>
-          <Image src={product.image} alt={product.title} width={470} height={260} />
+          <Image src={product.imageSrc?.url || "/placeholder.png"} alt={product.title} width={470} height={260} />
         </div>
         <div className="gap-2 flex flex-col items-left">
-          <p className="text-foreground-disabled">{product.category}</p>
+          <p className="text-foreground-disabled">{product.categoryId}</p>
           <h4 className="font-semibold">{product.title}</h4>
           <p className="text-primary font-bold">Kshs {product.price}</p>
           <p>{product.benefit}</p>
