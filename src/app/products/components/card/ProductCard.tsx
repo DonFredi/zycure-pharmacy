@@ -28,7 +28,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     <Link href={`/products/${product.id}`} className="w-70 h-fit flex flex-col  border-color rounded-sm">
       <div className="flex w-full h-auto">
         <Image
-          src={product.imageSrc?.url || "/placeholder.png"}
+          src={product.imageSrc?.url || "/images/placeholder.png"}
           alt={product.title}
           width={300}
           height={240}

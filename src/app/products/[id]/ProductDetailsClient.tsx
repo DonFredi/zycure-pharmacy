@@ -40,7 +40,13 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
       <Breadcrumb lastLabel={product.title} />
       <SectionContainer className="flex flex-col md:flex-row gap-2 py-4">
         <div>
-          <Image src={product.imageSrc?.url || "/placeholder.png"} alt={product.title} width={470} height={260} />
+          <Image
+            src={product.imageSrc?.url || "/images/placeholder.png"}
+            alt={product.title}
+            width={480}
+            height={200}
+            className="object-cover"
+          />
         </div>
         <div className="gap-2 flex flex-col items-left">
           <p className="text-foreground-disabled">{product.categoryId}</p>
