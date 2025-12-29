@@ -25,18 +25,18 @@ const ProductCard = ({ product }: { product: Product }) => {
   // const alreadyInCart = cart?.items?.some((item) => item.productId === product.id) ?? false;
 
   return (
-    <Link href={`/products/${product.id}`} className="w-70 h-fit flex flex-col  border-color rounded-sm">
-      <div className="flex w-full h-auto">
+    <Link href={`/products/${product.id}`} className="w-70 h-fit flex flex-col  border rounded-sm cursor-pointer">
+      <div className="relative w-full h-48 overflow-hidden ">
         <Image
           src={product.imageSrc?.url || "/images/placeholder.png"}
           alt={product.title}
-          width={300}
-          height={240}
+          fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, 300px"
         />
       </div>
       <div className="flex flex-col items-center gap-2 px-4 py-2 h-fit">
-        <span>{product.categoryId}</span>
+        {/* <span>{product.categoryId}</span> */}
         <span className="font-bold">{product.title}</span>
         <span className="text-primary font-semibold">{`Kshs ${product.price}`}</span>
         <Button onClick={handleAddCart}>Add to cart</Button>

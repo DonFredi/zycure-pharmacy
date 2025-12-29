@@ -1,13 +1,18 @@
-"use client";
-import ShippingCard from "./card/ShippingCard";
+import SectionContainer from "@/components/section/SectionContainer";
+import CheckoutPageClient from "./CheckoutPageClient";
 
-const CheckoutPage = () => {
-  return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h2 className="text-xl font-bold mb-6">Checkout</h2>
-      <ShippingCard />
-    </div>
-  );
+export const metadata = {
+  title: "Checkout | ZyCure Pharmacy Kenya",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
-export default CheckoutPage;
+export default async function ProductsPage() {
+  return (
+    <SectionContainer>
+      <CheckoutPageClient />
+    </SectionContainer>
+  );
+}

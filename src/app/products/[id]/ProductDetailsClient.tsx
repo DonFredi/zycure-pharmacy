@@ -51,8 +51,8 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
         <div className="gap-2 flex flex-col items-left">
           <p className="text-foreground-disabled">{product.categoryId}</p>
           <h4 className="font-semibold">{product.title}</h4>
-          <p className="text-primary font-bold">Kshs {product.price}</p>
-          <p>{product.benefit}</p>
+          <p className="text-primary font-bold text-xl">Kshs {product.price}</p>
+          <p className="">{product.description}</p>
           <div className="flex flex-row justify-start gap-2 ">
             <QuantitySelector initialQuantity={1} min={1} max={10} onChange={(qty) => setQuantity(qty)} />
             <Button onClick={handleAddCart}>Add to cart</Button>
