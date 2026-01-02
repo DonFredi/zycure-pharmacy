@@ -33,13 +33,12 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
     });
   };
   if (!product) return <div>Product not found</div>;
-  console.log(product);
-  console.log(quantity);
+
   return (
     <PageContainer>
       <Breadcrumb lastLabel={product.title} />
       <SectionContainer className="flex flex-col md:flex-row gap-2 py-4">
-        <div>
+        <div className="w-full md:w-1/2">
           <Image
             src={product.imageSrc?.url || "/images/placeholder.png"}
             alt={product.title}
@@ -48,8 +47,8 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
             className="object-cover"
           />
         </div>
-        <div className="gap-2 flex flex-col items-left">
-          <p className="text-foreground-disabled">{product.categoryId}</p>
+        <div className="gap-2 flex flex-col items-left w-full md:w-1/2 h-full">
+          {/* <p className="text-foreground-disabled">{product.categoryId}</p> */}
           <h4 className="font-semibold">{product.title}</h4>
           <p className="text-primary font-bold text-xl">Kshs {product.price}</p>
           <p className="">{product.description}</p>

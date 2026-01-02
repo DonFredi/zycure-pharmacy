@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Logo from "./Logo";
 import Image from "next/image";
@@ -5,8 +6,7 @@ import Copyright from "../icons/Copyright";
 import SectionContainer from "../section/SectionContainer";
 
 const Footer = () => {
-  const date = new Date();
-  const year = date.getFullYear();
+  const year = new Date().getFullYear();
 
   return (
     <footer className="flex flex-col items-center bg-neutral">

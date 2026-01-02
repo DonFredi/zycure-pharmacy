@@ -3,19 +3,19 @@
 import NavLink from "./NavLink";
 import Logo from "./Logo";
 import Cart from "../icons/Cart";
-import { useState } from "react";
-import Sidebar from "./Sidebar";
 import Menu from "../icons/Menu";
 import Link from "next/link";
 import { useCart } from "@/hooks/useCart";
 
-const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+type HeaderProps = {
+  setIsOpen: (open: boolean) => void;
+};
+const Header = ({ setIsOpen }: HeaderProps) => {
   const { totalQuantity } = useCart();
 
   return (
     <>
-      <header className="flex items-center justify-between p-6 ">
+      <header className="flex flex-row items-center justify-between w-full p-6">
         <button className="md:hidden rounded-sm p-2 border border-primary text-primary" onClick={() => setIsOpen(true)}>
           <Menu />
         </button>
@@ -38,8 +38,11 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-      {isOpen && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setIsOpen(false)} />}
+      {/* Mobile / Tablet sidebar only
+
+      {isOpen && <SidebarNav setIsOpen={setIsOpen} isOpen={isOpen} />}
+
+      {isOpen && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setIsOpen(false)} />} */}
     </>
   );
 };

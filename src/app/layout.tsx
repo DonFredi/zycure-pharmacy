@@ -57,9 +57,9 @@ export const metadata: Metadata = {
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "../components/ui/Header";
 import Banner from "../components/ui/Banner";
 import Footer from "../components/ui/Footer";
+import ClientLayout from "@/components/layout/ClientLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,13 +78,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col `}>
         <Banner />
-        <Header />
-
-        {children}
-
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
