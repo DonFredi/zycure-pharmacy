@@ -60,6 +60,7 @@ import "./globals.css";
 import Banner from "../components/ui/Banner";
 import Footer from "../components/ui/Footer";
 import ClientLayout from "@/components/layout/ClientLayout";
+import { CartProvider } from "@/contexts/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -80,7 +81,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col `}>
         <Banner />
-        <ClientLayout>{children}</ClientLayout>
+        <CartProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </CartProvider>
       </body>
     </html>
   );

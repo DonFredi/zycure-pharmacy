@@ -11,7 +11,7 @@ type HeaderProps = {
   setIsOpen: (open: boolean) => void;
 };
 const Header = ({ setIsOpen }: HeaderProps) => {
-  const { totalQuantity } = useCart();
+  const { totalItems } = useCart();
 
   return (
     <>
@@ -29,20 +29,13 @@ const Header = ({ setIsOpen }: HeaderProps) => {
           <Link className="text-primary relative" href={"/cart"}>
             <Cart />
           </Link>
-          <div
-            className={`absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold text-white ${
-              totalQuantity > 0 ? "bg-red-500" : "bg-primary"
-            }`}
-          >
-            {totalQuantity}
-          </div>
+          {totalItems > 0 && (
+            <span className="absolute -top-2 -right-2 w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold text-white bg-error-dark">
+              {totalItems}
+            </span>
+          )}
         </div>
       </header>
-      {/* Mobile / Tablet sidebar only
-
-      {isOpen && <SidebarNav setIsOpen={setIsOpen} isOpen={isOpen} />}
-
-      {isOpen && <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setIsOpen(false)} />} */}
     </>
   );
 };

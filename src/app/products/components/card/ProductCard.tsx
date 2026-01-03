@@ -4,9 +4,11 @@ import { useCart } from "@/hooks/useCart";
 import { Product } from "@/types/products";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const { addToCart } = useCart();
+  const router = useRouter();
 
   const handleAddCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       description: product.description,
       use: product.use,
     });
+    router.push("/cart");
   };
   // const alreadyInCart = cart?.items?.some((item) => item.productId === product.id) ?? false;
 

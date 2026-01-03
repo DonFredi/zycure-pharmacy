@@ -9,7 +9,7 @@ const ProductsSection = ({ products }: ProductsSectionProps) => {
   if (products.length === 0) return <p>No products available</p>;
 
   return (
-    <div className="flex flex-wrap gap-4 mt-2 p-0 md:px-4 md:py-2 items-center">
+    <div className="flex flex-wrap gap-4 mt-2 p-0 md:px-4 md:py-2 place-content-center">
       {products
         .filter((product): product is Product => !!product && !!product.id) // ✅ type guard
         .map((product) => (

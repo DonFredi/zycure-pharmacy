@@ -21,16 +21,19 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
   const [quantity, setQuantity] = useState(1);
 
   const handleAddCart = () => {
-    addToCart({
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      imageSrc: product.imageSrc ?? null,
-      categoryId: product.categoryId,
-      benefit: product.benefit,
-      description: product.description,
-      use: product.use,
-    });
+    addToCart(
+      {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        imageSrc: product.imageSrc ?? null,
+        categoryId: product.categoryId,
+        benefit: product.benefit,
+        description: product.description,
+        use: product.use,
+      },
+      quantity
+    );
   };
   if (!product) return <div>Product not found</div>;
 
