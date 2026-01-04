@@ -4,13 +4,16 @@ import Logo from "./Logo";
 import Image from "next/image";
 import Copyright from "../icons/Copyright";
 import SectionContainer from "../section/SectionContainer";
+import Facebook from "../icons/Facebook";
+import TikTok from "../icons/TikTok";
+import X from "../icons/X";
 
 const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="flex flex-col items-center bg-neutral">
-      <SectionContainer>
+    <footer className=" bg-neutral">
+      <SectionContainer className="flex flex-col items-center bg-neutral">
         <div className="flex md:flex-row flex-col justify-between px-6 py-3">
           <div className="md:w-1/2 w-full gap-4.5 flex flex-col justify-start p-4">
             <div>
@@ -22,21 +25,25 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="flex flex-row md:justify-around justify-between p-4">
+            <div className="flex flex-row justify-between ">
               <div>
-                <h4 className="font-bold text-xl">Quick Links</h4>
-                <ul className="flex flex-col">
+                <ul className="flex flex-row gap-4  text-primary justify-center">
                   <Link href={"/"}>Home</Link>
                   <Link href={"/products"}>Products</Link>
                   <Link href={"/contacts"}>Contacts</Link>
                 </ul>
               </div>
               <div>
-                <h4 className=" font-bold text-xl">Social Links</h4>
-                <ul className="flex flex-col">
-                  <Link href={"/"}>Facebook</Link>
-                  <Link href={"/products"}>Instagram</Link>
-                  <Link href={"/contacts"}>TikTok</Link>
+                <ul className="flex flex-row gap-4 text-primary justify-center">
+                  <Link href={"/"}>
+                    <Facebook />
+                  </Link>
+                  <Link href={"/products"}>
+                    <TikTok />
+                  </Link>
+                  <Link href={"/contacts"}>
+                    <X />
+                  </Link>
                 </ul>
               </div>
             </div>
