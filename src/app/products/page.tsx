@@ -1,13 +1,17 @@
 // src/app/products/page.tsx
-"use client";
+
 import SectionContainer from "@/components/section/SectionContainer";
 
 import ProductsClient from "./ProductsClient";
+import Loader from "@/components/loader";
+import { Suspense } from "react";
 
 export default function ProductsPage() {
   return (
-    <SectionContainer>
-      <ProductsClient />
-    </SectionContainer>
+    <Suspense fallback={<Loader message="Loading Products.." />}>
+      <SectionContainer>
+        <ProductsClient />
+      </SectionContainer>
+    </Suspense>
   );
 }

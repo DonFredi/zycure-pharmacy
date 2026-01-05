@@ -1,9 +1,9 @@
-const loader = () => {
+// components/ui/Loader.tsx
+export default function Loader({ message }: { message: string }) {
   return (
-    <div>
-      __Spinner__
-      <h2>loading page...</h2>
+    <div className="flex items-center justify-center min-h-[50vh]">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      {message}
     </div>
   );
-};
-export default loader;
+}

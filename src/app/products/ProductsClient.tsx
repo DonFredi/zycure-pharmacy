@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useProducts } from "@/hooks/useProducts";
+import { useDebounce } from "@/hooks/useDebounce";
 import CategoryBar from "./components/section/CategoryBar";
 import MobileCategorySearch from "./components/card/MobileCategorySearch";
 import ProductsSection from "./components/section/ProductsSection";
@@ -19,12 +20,12 @@ const ProductsClient = () => {
   const [category, setCategory] = useState<string | undefined>(urlCategory);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  // 🔹 Keep state in sync when URL changes
-  useEffect(() => {
-    setCategory(urlCategory);
-  }, [urlCategory]);
-
-  const { products, loading } = useProducts(category, searchTerm);
+  //   // 🔹 Keep state in sync when URL changes
+  //   useEffect(() => {
+  //     setCategory(urlCategory);
+  //   }, [urlCategory]);
+  const debouncedSearch = useDebounce(searchTerm, 800);
+  const { products, loading } = useProducts(category, debouncedSearch);
 
   if (loading) return <p>Loading products...</p>;
 
