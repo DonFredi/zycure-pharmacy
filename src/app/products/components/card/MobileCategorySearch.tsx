@@ -3,7 +3,7 @@
 import { useCategories } from "@/hooks/useCategory";
 
 interface Props {
-  onSelect: (category: string | undefined) => void;
+  onSelect: (categoryId: string | undefined) => void;
 }
 
 const MobileCategorySearch = ({ onSelect }: Props) => {
@@ -14,7 +14,7 @@ const MobileCategorySearch = ({ onSelect }: Props) => {
       <select className="w-[90%] border rounded-md px-3 py-2" onChange={(e) => onSelect(e.target.value || undefined)}>
         <option value="">Search by category...</option>
         {categories.map((cat) => (
-          <option key={cat.id} value={cat.name}>
+          <option key={cat.id} value={cat.id}>
             {cat.name}
           </option>
         ))}

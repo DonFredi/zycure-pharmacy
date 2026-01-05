@@ -48,13 +48,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     // const totals = calculateTotals(items);
   }, []);
 
+  //   const addToCart = (product: Omit<CartProductItem, "quantity">, quantity = 1) => {
+  //     setCart((prev) => {
+  //       const exists = prev.items.find((i) => i.id === product.id);
+  //       const items = exists
+  //         ? prev.items.map((i) => (i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i))
+  //         : [...prev.items, { ...product, quantity }];
+
+  //       return { items, ...calculateTotals(items) };
+  //     });
+  //   };
+
   const addToCart = (product: Omit<CartProductItem, "quantity">, quantity = 1) => {
     setCart((prev) => {
-      const exists = prev.items.find((i) => i.id === product.id);
-      const items = exists
+      const items = prev.items.some((i) => i.id === product.id)
         ? prev.items.map((i) => (i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i))
         : [...prev.items, { ...product, quantity }];
 
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
       return { items, ...calculateTotals(items) };
     });
   };
@@ -73,14 +84,26 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const removeFromCart = (id: string) => {
     setCart((prev) => {
+      console.log("Removing ID:", id);
+      console.log(
+        "Cart items:",
+        prev.items.map((i) => i.id)
+      );
       const items = prev.items.filter((i) => i.id !== id);
+      console.log(
+        "After removal:",
+        items.map((i) => i.id)
+      );
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
       return { items, ...calculateTotals(items) };
     });
   };
 
   const clearCart = () => {
+    localStorage.removeItem(CART_STORAGE_KEY);
     setCart({ items: [], totalQuantity: 0, totalAmount: 0 });
   };
+
   const submitOrder = async (orderDetails: { customerName: string; phone: string; address?: string }) => {
     if (cart.items.length === 0) return;
 

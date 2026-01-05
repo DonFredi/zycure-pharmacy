@@ -24,11 +24,11 @@ const ProductSection = ({ products }: ProductsSectionProps) => {
         />
         <Link href="/products" className="text-primary hover:underline flex flex-row gap-1 items-center">
           {" "}
-          View More Products
+          View More
           <MoveRight />
         </Link>
       </div>
-      <div className="flex flex-wrap gap-4 px-4 py-2 items-center">
+      <div className="flex flex-col md:flex-row md:flex-wrap gap-4 px-4 py-2 items-center md:justify-start">
         {products
           .filter((p) => !!p && !!p.id) // optional safety
           .map((product) => (

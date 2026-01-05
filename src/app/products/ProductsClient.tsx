@@ -1,15 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useProducts } from "@/hooks/useProducts";
 import CategoryBar from "./components/section/CategoryBar";
 import ProductsSection from "./components/section/ProductsSection";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import MobileCategorySearch from "./components/card/MobileCategorySearch";
+import { useSearchParams } from "next/navigation";
 
-const ProductsClient = () => {
-  const { products, loading } = useProducts();
+const ProductsClient = ({ initialCategory }: { initialCategory?: string }) => {
   const [category, setCategory] = useState<string | undefined>();
-
+  const searchParams = useSearchParams();
+  const categoryId = searchParams.get("category") || undefined; // category ID
+  const { products, loading } = useProducts(category);
   if (loading) return <p>Loading products...</p>;
   return (
     <div className="flex flex-col md:flex-row w-full justify-start">

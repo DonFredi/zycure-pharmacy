@@ -5,7 +5,7 @@ import { db } from "@/lib/firebaseClient";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { Product } from "@/types/products";
 
-export function useProducts(category?: string) {
+export function useProducts(categoryId?: string) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,7 +15,7 @@ export function useProducts(category?: string) {
         setLoading(true);
 
         const productsRef = collection(db, "products");
-        const q = category ? query(productsRef, where("categoryId", "==", category)) : productsRef;
+        const q = categoryId ? query(productsRef, where("categoryId", "==", categoryId)) : productsRef;
 
         const snapshot = await getDocs(q);
 
@@ -54,7 +54,7 @@ export function useProducts(category?: string) {
     }
 
     fetchProducts();
-  }, [category]);
+  }, [categoryId]);
 
   return { products, loading };
 }
