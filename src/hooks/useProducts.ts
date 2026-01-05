@@ -5,7 +5,7 @@ import { db } from "@/lib/firebaseClient";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { Product } from "@/types/products";
 
-export function useProducts(categoryId?: string) {
+export function useProducts(categoryId?: string, searchTerm?: string) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,11 +15,12 @@ export function useProducts(categoryId?: string) {
         setLoading(true);
 
         const productsRef = collection(db, "products");
+
         const q = categoryId ? query(productsRef, where("categoryId", "==", categoryId)) : productsRef;
 
         const snapshot = await getDocs(q);
 
-        const list: Product[] = snapshot.docs.map((doc) => {
+        let list: Product[] = snapshot.docs.map((doc) => {
           const data = doc.data();
 
           return {
@@ -44,6 +45,12 @@ export function useProducts(categoryId?: string) {
           };
         });
 
+        // 🔍 Client-side name search
+        if (searchTerm) {
+          const term = searchTerm.toLowerCase();
+          list = list.filter((p) => p.title.toLowerCase().includes(term));
+        }
+
         setProducts(list);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -54,7 +61,7 @@ export function useProducts(categoryId?: string) {
     }
 
     fetchProducts();
-  }, [categoryId]);
+  }, [categoryId, searchTerm]); // ✅ BOTH deps
 
   return { products, loading };
 }
