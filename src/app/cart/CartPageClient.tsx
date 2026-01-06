@@ -5,6 +5,9 @@ import Cancel from "@/components/icons/Cancel";
 import { useCart } from "@/hooks/useCart";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
+import Loader from "@/components/Loader";
+import Link from "next/link";
+import SectionContainer from "@/components/section/SectionContainer";
 
 const CartPageClient = () => {
   const { cart, totalAmount, totalQuantity, removeFromCart } = useCart();
@@ -18,29 +21,29 @@ const CartPageClient = () => {
   };
 
   if (!cart) {
-    return <p>Loading cart...</p>;
+    return <Loader message="Loading your cart..." />;
   }
 
   // ✅ Empty cart
   if (cart.items.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-around rounded-sm">
+      <div className="flex flex-col items-center justify-start h-[50vh]">
         {" "}
-        <p className="font-bold">NO ITEMS IN THE CART</p>
-        <button onClick={goBack} className="text-primary hover:underline">
-          Go back to previous page
-        </button>
+        <p className="font-bold">No items in your cart.</p>
+        <Link href="/" className="text-primary hover:underline">
+          Go back to Homepage
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4 space-y-6">
-      <p className="font-bold text-center text-primary">ITEMS IN YOUR CART</p>
+    <div className=" p-4 space-y-6">
+      <p className="font-bold text-center text-primary">Items in your cart</p>
       {/* CART ITEMS */}
       <div className="space-y-4">
         {cart.items.map((item) => (
-          <div key={item.id} className="flex items-center justify-between border p-4 rounded-sm border-foreground">
+          <div key={item.id} className="flex items-center justify-between border p-4 rounded-sm border-foreground my-2">
             <Image src={item.imageSrc?.url || "/placeholder.png"} alt={item.title} width={50} height={100} />
             <div>
               <p className="font-semibold">{item.title}</p>

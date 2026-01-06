@@ -12,8 +12,8 @@ const Hero = () => {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (
-    <section className="bg-neutral gap-4 p-4 md:p-12 grid md:grid-cols-2 grid-cols-1">
-      <div className="flex flex-col max-w-163 items-center gap-6">
+    <section className="bg-neutral  grid md:grid-cols-2 grid-cols-1">
+      <div className="flex flex-col max-w-163 items-center gap-6  p-4 md:p-12">
         <Title
           text="Fast. Reliable. Online Pharmacy You Can Trust."
           as="h1"
@@ -37,7 +37,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="relative h-75">
-        <Image src="/images/hero-image.png" alt="hero-section-image" fill className="object-cover " />
+        <Image src="/images/hero-image.jpg" alt="hero-section-image" fill className="object-cover " />
       </div>
     </section>
   );

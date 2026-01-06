@@ -1,15 +1,16 @@
 "use client";
 
 import { Search, X } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 interface Props {
   value: string;
   onChange: (val: string) => void;
+  open: boolean;
+  setOpen: (val: boolean) => void;
 }
 
-const SearchBar = ({ value, onChange }: Props) => {
-  const [open, setOpen] = useState(false);
+const SearchBar = ({ value, onChange, open, setOpen }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-focus when opened
@@ -22,7 +23,12 @@ const SearchBar = ({ value, onChange }: Props) => {
   return (
     <div className="relative flex items-center">
       {/* Search button */}
-      <button type="button" onClick={() => setOpen((p) => !p)} className="p-2 rounded-full hover:bg-muted transition">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="p-2 rounded-full hover:bg-muted transition"
+        aria-label="Open Search"
+      >
         <Search size={20} />
       </button>
 

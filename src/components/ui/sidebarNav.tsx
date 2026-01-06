@@ -24,7 +24,7 @@ const SidebarNav = ({ isOpen, setIsOpen }: Props) => {
       <Button
         variant="outline"
         onClick={() => setIsOpen(false)}
-        className="bg-white text-primary fixed top-4 left-[calc(75%+0.5rem)] z-60 shadow-md rounded-sm h-4 w-4 flex items-center justify-center"
+        className="bg-white text-primary fixed top-0 left-[calc(75%+0.1rem)] z-60 shadow-md rounded-sm h-4 w-4 flex items-center justify-center"
       >
         <Cancel />
       </Button>

@@ -10,7 +10,7 @@ const MobileCategorySearch = ({ onSelect }: Props) => {
   const { categories } = useCategories();
 
   return (
-    <div className="block md:hidden">
+    <div className="block">
       <select className="w-[90%] border rounded-md px-3 py-2" onChange={(e) => onSelect(e.target.value || undefined)}>
         <option value="">Search by category...</option>
         {categories.map((cat) => (

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useProducts } from "@/hooks/useProducts";
 import { useDebounce } from "@/hooks/useDebounce";
-import CategoryBar from "./components/section/CategoryBar";
 import MobileCategorySearch from "./components/card/MobileCategorySearch";
 import ProductsSection from "./components/section/ProductsSection";
 import Breadcrumb from "@/components/ui/Breadcrumb";
@@ -19,6 +18,7 @@ const ProductsClient = () => {
   // 🔹 Local state
   const [category, setCategory] = useState<string | undefined>(urlCategory);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [open, setOpen] = useState(false);
 
   //   // 🔹 Keep state in sync when URL changes
   //   useEffect(() => {
@@ -30,14 +30,13 @@ const ProductsClient = () => {
   if (loading) return <p>Loading products...</p>;
 
   return (
-    <div className="flex flex-col md:flex-row w-full justify-start gap-4">
-      <div className="flex flex-col gap-2">
-        <Breadcrumb />
+    <div className="flex flex-col justify-start gap-4">
+      <Breadcrumb />
 
-        <CategoryBar onSelect={setCategory} />
+      {/* <CategoryBar onSelect={setCategory} /> */}
+      <div className="flex flex-row justify-center gap-2 w-full">
         <MobileCategorySearch onSelect={setCategory} />
-
-        <SearchBar value={searchTerm} onChange={setSearchTerm} />
+        <SearchBar value={searchTerm} onChange={setSearchTerm} open={open} setOpen={setOpen} />
       </div>
 
       <ProductsSection products={products} />

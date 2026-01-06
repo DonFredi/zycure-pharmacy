@@ -15,7 +15,7 @@ const Footer = () => {
     <footer className=" bg-neutral">
       <SectionContainer className="flex flex-col items-center bg-neutral">
         <div className="flex md:flex-row flex-col justify-between px-6 py-3">
-          <div className="md:w-1/2 w-full gap-4.5 flex flex-col justify-start p-4">
+          <div className="md:w-1/2 w-full gap-5 flex flex-col justify-start p-4 ">
             <div>
               <Logo />
               <p>
@@ -25,7 +25,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="flex flex-row justify-between ">
+            <div className="flex flex-col md:flex-row justify-between gap-2 ">
               <div>
                 <ul className="flex flex-row gap-4  text-primary justify-center">
                   <Link href={"/"}>Home</Link>

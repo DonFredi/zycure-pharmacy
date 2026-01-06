@@ -7,7 +7,7 @@ export const EmailTemplate = ({ children }: { children: React.ReactNode }) => (
   <Html>
     <Head />
     <Body style={main}>
-      <Preview>New Contact from ZyCure</Preview>
+      <Preview>New Message from ZyCure</Preview>
       <Container style={container}>
         <EmailHeader />
         {children}

@@ -4,7 +4,7 @@ import Title from "@/components/ui/Title";
 export default function EmbedMap() {
   return (
     <SectionContainer>
-      <div className="w-full h-90 aspect-video">
+      <div className="flex flex-col justify-center items-center h-90 ">
         <Title
           text="Our Location"
           as="h2"

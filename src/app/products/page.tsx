@@ -3,8 +3,8 @@
 import SectionContainer from "@/components/section/SectionContainer";
 
 import ProductsClient from "./ProductsClient";
-import Loader from "@/components/loader";
 import { Suspense } from "react";
+import Loader from "@/components/Loader";
 
 export default function ProductsPage() {
   return (
