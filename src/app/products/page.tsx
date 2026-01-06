@@ -8,7 +8,7 @@ import Loader from "@/components/Loader";
 
 export default function ProductsPage() {
   return (
-    <Suspense fallback={<Loader message="Loading Products.." />}>
+    <Suspense fallback={<Loader message="Loading Products..." />}>
       <SectionContainer>
         <ProductsClient />
       </SectionContainer>
