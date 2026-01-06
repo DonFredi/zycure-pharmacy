@@ -7,10 +7,10 @@ export default function EmailFooter() {
       <Text style={paragraph}>
         Best,
         <br />
-        The Airstream team
+        The Zycure Pharmacy team
       </Text>
       <Hr style={hr} />
-      <Text style={footer}>Ambank House 13th Floor, Suite 14 | University Way P.O Box 53025-00200, Nairobi</Text>
+      <Text style={footer}>Umoja | Moi Drive, Nairobi</Text>
     </Section>
   );
 }
