@@ -1,54 +1,52 @@
 "use client";
 
 import { Search, X } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface Props {
   value: string;
   onChange: (val: string) => void;
-  open: boolean;
-  setOpen: (val: boolean) => void;
 }
 
-const SearchBar = ({ value, onChange, open, setOpen }: Props) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+const SearchBar = ({ value, onChange }: Props) => {
+  const [localValue, setLocalValue] = useState(value);
 
-  // Auto-focus when opened
+  // Sync external value changes (e.g. reset)
   useEffect(() => {
-    if (open) {
-      inputRef.current?.focus();
-    }
-  }, [open]);
+    setLocalValue(value);
+  }, [value]);
+
+  // Debounce parent updates
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      onChange(localValue);
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [localValue, onChange]);
 
   return (
-    <div className="relative flex items-center">
-      {/* Search button */}
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="p-2 rounded-full hover:bg-muted transition"
-        aria-label="Open Search"
-      >
-        <Search size={20} />
-      </button>
+    <div className="flex justify-start w-full">
+      <div className="relative w-full md:w-64 lg:w-80">
+        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
 
-      {/* Expanding input */}
-      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${open ? "w-48 ml-2" : "w-0"}`}>
         <input
-          ref={inputRef}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
+          value={localValue}
+          onChange={(e) => setLocalValue(e.target.value)}
           placeholder="Search products..."
-          className="w-full border rounded-md px-3 py-2 text-sm outline-none"
+          className="w-full border rounded-md pl-9 pr-10 py-2 text-sm outline-none"
         />
-      </div>
 
-      {/* Clear */}
-      {open && value && (
-        <button onClick={() => onChange("")} className="absolute right-2 text-muted-foreground">
-          <X size={14} />
-        </button>
-      )}
+        {localValue && (
+          <button
+            type="button"
+            onClick={() => setLocalValue("")}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+          >
+            <X size={14} />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
