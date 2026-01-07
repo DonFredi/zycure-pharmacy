@@ -37,7 +37,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="relative h-75">
-        <Image src="/images/hero-image.jpg" alt="hero-section-image" fill className="object-cover " />
+        <Image src="/images/hero-image.png" alt="hero-section-image" fill className="object-cover " />
       </div>
     </section>
   );

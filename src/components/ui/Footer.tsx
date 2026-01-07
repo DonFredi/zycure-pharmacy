@@ -7,6 +7,7 @@ import SectionContainer from "../section/SectionContainer";
 import Facebook from "../icons/Facebook";
 import TikTok from "../icons/TikTok";
 import X from "../icons/X";
+import Instagram from "../icons/Instagram";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -34,7 +35,7 @@ const Footer = () => {
                 </ul>
               </div>
               <div>
-                <ul className="flex flex-row gap-4 text-primary justify-center">
+                <ul className="flex flex-row gap-4 text-primary justify-center items-center">
                   <Link href={"/"}>
                     <Facebook />
                   </Link>
@@ -42,7 +43,7 @@ const Footer = () => {
                     <TikTok />
                   </Link>
                   <Link href={"/contacts"}>
-                    <X />
+                    <Instagram />
                   </Link>
                 </ul>
               </div>
