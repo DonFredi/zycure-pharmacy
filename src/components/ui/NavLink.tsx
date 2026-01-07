@@ -14,9 +14,10 @@ const NavLink = ({ href, label }: NavLinkProps) => {
   return (
     <Link
       href={href}
-      className={`text-primary px-5 py-3 flex items-center rounded-md hover:outline outline-primary transition ${
-        isActive ? "text-white bg-primary" : "text-primary"
-      }`}
+      className={`relative  transition-all duration-300 ease-out
+    hover:-translate-y-0.5 hover:scale-[1.03] text-primary px-5 py-3 flex items-center rounded-md hover:outline outline-primary ${
+      isActive ? "text-white bg-primary scale-95" : "text-primary"
+    }`}
     >
       {label}
     </Link>

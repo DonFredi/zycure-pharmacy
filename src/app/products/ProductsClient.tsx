@@ -34,7 +34,7 @@ const ProductsClient = () => {
       <Breadcrumb />
 
       {/* <CategoryBar onSelect={setCategory} /> */}
-      <div className="flex flex-row justify-center gap-4 w-full md:w-[90%] md:mx-auto">
+      <div className="flex flex-row justify-start gap-4 w-full">
         <MobileCategorySearch onSelect={setCategory} />
         <SearchBar value={searchTerm} onChange={setSearchTerm} open={open} setOpen={setOpen} />
       </div>

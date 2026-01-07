@@ -26,7 +26,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="flex flex-col md:flex-row justify-between gap-2 ">
+            <div className="flex flex-col md:flex-row justify-around gap-2 ">
               <div>
                 <ul className="flex flex-row gap-4  text-primary justify-center">
                   <Link href={"/"}>Home</Link>
