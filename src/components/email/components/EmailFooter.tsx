@@ -5,9 +5,9 @@ export default function EmailFooter() {
   return (
     <Section>
       <Text style={paragraph}>
-        Best,
+        Regards,
         <br />
-        The Zycure Pharmacy team
+        The Zycure Pharmacy Team
       </Text>
       <Hr style={hr} />
       <Text style={footer}>Umoja | Moi Drive, Nairobi</Text>
