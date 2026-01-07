@@ -6,7 +6,7 @@ import { useCart } from "@/hooks/useCart";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import Link from "next/link";
-import Loader from "@/components/Loader";
+import Loader from "@/components/ui/Loader";
 
 const CartPageClient = () => {
   const { cart, totalAmount, totalQuantity, removeFromCart } = useCart();

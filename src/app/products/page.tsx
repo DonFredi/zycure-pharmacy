@@ -4,7 +4,7 @@ import SectionContainer from "@/components/section/SectionContainer";
 
 import ProductsClient from "./ProductsClient";
 import { Suspense } from "react";
-import Loader from "@/components/Loader";
+import Loader from "@/components/ui/Loader";
 
 export default function ProductsPage() {
   return (
