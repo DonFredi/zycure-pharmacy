@@ -58,6 +58,17 @@ const Footer = () => {
             <Image src="/images/licence-image.png" alt="licence-image" width={300} height={300} />
           </div>
         </div>
+        <p>
+          Powered by{" "}
+          <a
+            href="https://dondadiportfolio.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline hover:no-underline"
+          >
+            DON DEVELOPER
+          </a>
+        </p>
 
         <p className="text-foreground flex flex-row text-wrap items-center">
           <Copyright />
