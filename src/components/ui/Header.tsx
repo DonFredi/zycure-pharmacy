@@ -23,7 +23,7 @@ const Header = ({ setIsOpen }: HeaderProps) => {
         <nav className="hidden md:flex flex-row gap-6 justify-center h-fit">
           <NavLink href="/" label="Home" />
           <NavLink href="/products" label="Products" />
-          <NavLink href="/contacts" label="Contact" />
+          <NavLink href="/contacts" label="Contacts" />
         </nav>
         <div className="relative">
           <Link className="text-primary relative" href={"/cart"}>

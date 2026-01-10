@@ -27,8 +27,6 @@ const ProductsClient = () => {
   const debouncedSearch = useDebounce(searchTerm, 800);
   const { products, loading } = useProducts(category, debouncedSearch);
 
-  if (loading) return <Loader message="Loading products..." />;
-
   return (
     <div className="flex flex-col justify-start gap-4">
       <Breadcrumb />
@@ -38,8 +36,7 @@ const ProductsClient = () => {
         {/* <MobileCategorySearch onSelect={setCategory} /> */}
         <SearchBar value={searchTerm} onChange={setSearchTerm} />
       </div>
-
-      <ProductsSection products={products} />
+      {loading ? <Loader message="Searching products..." /> : <ProductsSection products={products} />}
     </div>
   );
 };
