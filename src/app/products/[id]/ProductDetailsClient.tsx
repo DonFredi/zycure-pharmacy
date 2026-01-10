@@ -5,20 +5,27 @@ import { Button } from "@/components/ui/Button";
 import { Product } from "@/types/products";
 import Image from "next/image";
 import { useState } from "react";
-import RelatedProductsSection from "../components/section/RelatedProductsSection";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import QuantitySelector from "@/components/ui/QuantitySelector";
 import { useCart } from "@/hooks/useCart";
 import PageContainer from "@/components/pages/PageContainer";
+import { getRelatedProducts } from "@/lib/getRelatedProducts";
+import { useProducts } from "@/hooks/useProducts";
+import ProductSection from "@/app/home/components/section/ProductSection";
 
 interface ProductDetailsProps {
   product: Product;
 }
 
 export default function ProductDetailsClient({ product }: ProductDetailsProps) {
+  if (!product) {
+    return <div>Product not found</div>;
+  }
   const { addToCart } = useCart();
+  const { products } = useProducts();
   const [activeTab, setActiveTab] = useState<"description" | "use">("description");
   const [quantity, setQuantity] = useState(1);
+  const relatedProducts = getRelatedProducts(products, product, 4);
 
   const handleAddCart = () => {
     addToCart(
@@ -35,18 +42,17 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
       quantity
     );
   };
-  if (!product) return <div>Product not found</div>;
 
   return (
     <PageContainer>
       <Breadcrumb lastLabel={product.title} />
-      <SectionContainer className="flex flex-col md:flex-row gap-2 py-4">
+      <SectionContainer className="flex flex-col md:flex-row gap-2">
         <div className="w-full md:w-1/2">
           <Image
             src={product.imageSrc?.url || "/images/placeholder.png"}
             alt={product.title}
             width={480}
-            height={200}
+            height={150}
             className="object-cover"
           />
         </div>
@@ -84,7 +90,14 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
           {activeTab === "use" && <p className="leading relaxed">{product.use}</p>}
         </div>
 
-        <RelatedProductsSection />
+        {relatedProducts.length > 0 && (
+          <ProductSection
+            title="Related Products"
+            products={relatedProducts}
+            limit={4}
+            viewMoreHref={`/products?category=${product.categoryId}`}
+          />
+        )}
       </SectionContainer>
     </PageContainer>
   );

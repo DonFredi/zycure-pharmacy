@@ -9,7 +9,7 @@ interface NavLinkProps {
 const NavLink = ({ href, label }: NavLinkProps) => {
   const pathname = usePathname();
 
-  const isActive = pathname === href;
+  const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <Link
