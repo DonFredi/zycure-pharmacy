@@ -42,9 +42,9 @@ const CartPageClient = () => {
       {/* CART ITEMS */}
       <div className="space-y-4">
         {cart.items.map((item) => (
-          <div key={item.id} className="flex items-center justify-between border p-4 rounded-sm border-foreground my-2">
-            <Image src={item.imageSrc?.url || "/placeholder.png"} alt={item.title} width={50} height={100} />
-            <div>
+          <div key={item.id} className="flex justify-between items-center border p-4 rounded-sm border-foreground">
+            <Image src={item.imageSrc?.url || "/placeholder.png"} alt={item.title} width={80} height={80} />
+            <div className="flex flex-col gap-1">
               <p className="font-semibold">{item.title}</p>
               <p className="text-sm">
                 KES {item.price} × {item.quantity}
@@ -52,9 +52,9 @@ const CartPageClient = () => {
               <p className="font-bold">KES {item.price * item.quantity}</p>
             </div>
 
-            <button onClick={() => removeFromCart(item.id)}>
+            <Button onClick={() => removeFromCart(item.id)} className="bg-primary text-white w-4 h-4 rounded-sm">
               <Cancel />
-            </button>
+            </Button>
           </div>
         ))}
       </div>

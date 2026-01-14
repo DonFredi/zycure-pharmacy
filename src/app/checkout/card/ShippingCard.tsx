@@ -4,29 +4,47 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/hooks/useCart";
 import { useOrder } from "@/hooks/useOrder";
+import { Order } from "@/types/order";
 import Link from "next/link";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const ShippingCard = () => {
   const { placeOrder, isSubmitting, error, orderId } = useOrder();
   const { cart, totalAmount } = useCart();
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [location, setLocation] = useState("");
-  const [email, setEmail] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState<"mpesa" | "cash">("mpesa");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Order>({
+    defaultValues: {
+      paymentMethod: "mpesa",
+    },
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit = (data: Order) => {
     placeOrder({
-      name,
-      phone: Number(phone),
-      location,
-      email,
-      paymentMethod,
+      ...data,
+      phone: Number(data.phone),
     });
   };
+
+  //   const [name, setName] = useState("");
+  //   const [phone, setPhone] = useState("");
+  //   const [location, setLocation] = useState("");
+  //   const [email, setEmail] = useState("");
+  //   const [paymentMethod, setPaymentMethod] = useState<"mpesa" | "cash">("mpesa");
+
+  //   const handleSubmit = (e: React.FormEvent) => {
+  //     e.preventDefault();
+
+  //     placeOrder({
+  //       name,
+  //       phone: Number(phone),
+  //       location,
+  //       email,
+  //       paymentMethod,
+  //     });
+  //   };
 
   if (orderId) {
     return (
@@ -41,80 +59,64 @@ const ShippingCard = () => {
   }
 
   return (
-    <div className=" flex flex-col md:flex-row justify-between gap-4">
+    <div className=" flex flex-col md:flex-row justify-between gap-2">
       <div className="w-full md:w-1/2 flex flex-col gap-2">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <div>
-            <label htmlFor="name" className="text-sm font-medium text-foreground">
-              Full Name:
-            </label>
-            <Input
-              type="text"
-              placeholder="Enter your name"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="text-sm font-medium text-foreground">
-              Email:
-            </label>
-            <Input
-              type="text"
-              placeholder="Enter your email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="location" className="text-sm font-medium text-foreground">
-              Shipping Address:
-            </label>
-            <Input
-              type="text"
-              placeholder="Enter your location"
-              name="name"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
+            <label className="text-sm font-medium">Full Name</label>
+            <Input {...register("name", { required: "Name is required" })} placeholder="Enter your name" />
+            {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
           </div>
 
           <div>
-            <label htmlFor="phone" className="text-sm font-medium text-foreground">
-              Phone:
-            </label>
+            <label className="text-sm font-medium">Email</label>
+            <Input
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: "Invalid email",
+                },
+              })}
+              placeholder="Enter your email"
+            />
+            {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+          </div>
+
+          <div>
+            <label className="text-sm font-medium">Shipping Address</label>
+            <Input {...register("location", { required: "Address is required" })} placeholder="Enter your location" />
+            {errors.location && <p className="text-sm text-red-500">{errors.location.message}</p>}
+          </div>
+
+          <div>
+            <label className="text-sm font-medium">Phone</label>
             <Input
               type="tel"
+              {...register("phone", {
+                required: "Phone number is required",
+                minLength: {
+                  value: 9,
+                  message: "Phone number is too short",
+                },
+              })}
               placeholder="Enter your phone number"
-              name="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
             />
+            {errors.phone && <p className="text-sm text-red-500">{errors.phone.message}</p>}
           </div>
 
           <div>
-            <label htmlFor="payment" className="text-sm font-medium text-foreground">
-              Payment Method:
-            </label>
-            <select
-              className="border rounded p-2 w-full bg-background"
-              value={paymentMethod}
-              onChange={(e) => setPaymentMethod(e.target.value as "mpesa" | "cash")}
-            >
+            <label className="text-sm font-medium">Payment Method</label>
+            <select {...register("paymentMethod")} className="border rounded p-2 w-full bg-background">
               <option value="mpesa">M-Pesa</option>
               <option value="cash">Cash on Delivery</option>
             </select>
           </div>
+
           {error && <p className="text-red-500">{error}</p>}
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full rounded-none text-center my-4"
-            onSubmit={handleSubmit}
-          >
-            {isSubmitting ? "Placing Order.." : "Place Order"}
+
+          <Button type="submit" disabled={isSubmitting} className="w-full rounded-none mt-4">
+            {isSubmitting ? "Placing Order..." : "Place Order"}
           </Button>
         </form>
       </div>
