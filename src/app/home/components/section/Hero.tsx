@@ -12,8 +12,8 @@ const Hero = () => {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (
-    <section className="bg-neutral  grid md:grid-cols-2 grid-cols-1 p-4 md:p-8 ">
-      <div className="flex flex-col max-w-163 items-center gap-6  ">
+    <section className="bg-neutral  grid md:grid-cols-2 grid-cols-1 md:h-95 ">
+      <div className="flex flex-col max-w-163 items-center gap-6 p-4 md:p-8 ">
         <Title
           text="Fast. Reliable. Online Pharmacy You Can Trust."
           as="h1"

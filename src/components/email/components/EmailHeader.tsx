@@ -1,6 +1,6 @@
 import { Img, Link } from "@react-email/components";
 
-export const baseUrl = process.env.NEXT_PUBLIC_URL;
+export const baseUrl = process.env.PUBLIC_URL;
 
 export default function EmailHeader() {
   return (

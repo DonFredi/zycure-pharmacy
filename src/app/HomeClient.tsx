@@ -7,6 +7,8 @@ import ProductSection from "./home/components/section/ProductSection";
 import ContactSection from "./contacts/components/section/ContactSection";
 import { useProducts } from "@/hooks/useProducts";
 import PageContainer from "@/components/pages/PageContainer";
+import ContactMessageEmail from "@/components/email/ContactMessageEmail";
+import EmailHeader from "@/components/email/components/EmailHeader";
 
 const HomeClient = () => {
   const { products, loading } = useProducts();
@@ -18,6 +20,7 @@ const HomeClient = () => {
     <PageContainer>
       <Hero />
       <FeaturesSection />
+      <EmailHeader />
       <CTASection />
       <CategorySection />
       <ProductSection title="Our Products" products={products} limit={4} viewMoreHref="/products" />
