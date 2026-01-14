@@ -86,23 +86,28 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const removeFromCart = (id: string) => {
+    let removedItemTitle: string | null = null;
+
     setCart((prev) => {
       const removedItem = prev.items.find((i) => i.id === id);
 
-      if (!removedItem) {
-        return prev; // safety guard
-      }
+      if (!removedItem) return prev;
+
+      removedItemTitle = removedItem.title;
 
       const items = prev.items.filter((i) => i.id !== id);
 
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
 
-      toast.warning(`${removedItem.title} removed from cart 🗑️`, {
-        toastId: `remove-${id}`,
-      });
-
       return { items, ...calculateTotals(items) };
     });
+
+    // ✅ Side effect AFTER state update
+    if (removedItemTitle) {
+      toast.warning(`${removedItemTitle} removed from cart 🗑️`, {
+        toastId: `remove-${id}`,
+      });
+    }
   };
 
   //   const removeFromCart = (id: string) => {
