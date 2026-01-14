@@ -1,12 +1,12 @@
 "use client";
-import SectionContainer from "@/components/section/SectionContainer";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/hooks/useCart";
 import { useOrder } from "@/hooks/useOrder";
 import { Order } from "@/types/order";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const ShippingCard = () => {
   const { placeOrder, isSubmitting, error, orderId } = useOrder();
@@ -14,6 +14,7 @@ const ShippingCard = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Order>({
     defaultValues: {
@@ -28,35 +29,14 @@ const ShippingCard = () => {
     });
   };
 
-  //   const [name, setName] = useState("");
-  //   const [phone, setPhone] = useState("");
-  //   const [location, setLocation] = useState("");
-  //   const [email, setEmail] = useState("");
-  //   const [paymentMethod, setPaymentMethod] = useState<"mpesa" | "cash">("mpesa");
+  useEffect(() => {
+    if (orderId) {
+      toast.success(`Order placed successfully \nOrder ID: ${orderId}`);
 
-  //   const handleSubmit = (e: React.FormEvent) => {
-  //     e.preventDefault();
-
-  //     placeOrder({
-  //       name,
-  //       phone: Number(phone),
-  //       location,
-  //       email,
-  //       paymentMethod,
-  //     });
-  //   };
-
-  if (orderId) {
-    return (
-      <SectionContainer className=" flex flex-col items-center justify-around rounded-sm">
-        <h2 className="text-xl font-bold">Order placed successfully</h2>
-        Order ID: <strong>{orderId}</strong>
-        <Link href="/" className="text-primary hover:underline">
-          Go back to Homepage
-        </Link>
-      </SectionContainer>
-    );
-  }
+      // reset form AFTER successful order
+      reset();
+    }
+  }, [orderId, reset]);
 
   return (
     <div className=" flex flex-col md:flex-row justify-between gap-2">

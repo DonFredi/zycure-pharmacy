@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Banner from "../components/ui/Banner";
-import Footer from "../components/ui/Footer";
+import { ToastContainer } from "react-toastify";
 import ClientLayout from "@/components/layout/ClientLayout";
 import { CartProvider } from "@/contexts/CartContext";
 
@@ -82,6 +82,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col `}>
         <Banner />
         <CartProvider>
+          <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} pauseOnHover closeOnClick />
           <ClientLayout>{children}</ClientLayout>
         </CartProvider>
       </body>

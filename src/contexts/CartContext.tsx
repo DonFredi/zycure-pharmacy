@@ -1,10 +1,11 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { useCart } from "@/hooks/useCart";
 import { ClientCart, CartProductItem } from "@/types/cartItem";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebaseClient";
+import { toast } from "react-toastify";
 
 type CartContextType = {
   cart: ClientCart;
@@ -50,30 +51,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   //   const addToCart = (product: Omit<CartProductItem, "quantity">, quantity = 1) => {
   //     setCart((prev) => {
-  //       const exists = prev.items.find((i) => i.id === product.id);
-  //       const items = exists
-  //         ? prev.items.map((i) => (i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i))
-  //         : [...prev.items, { ...product, quantity }];
-
-  //       return { items, ...calculateTotals(items) };
-  //     });
-  //   };
-
-  const addToCart = (product: Omit<CartProductItem, "quantity">, quantity = 1) => {
-    setCart((prev) => {
-      const items = prev.items.some((i) => i.id === product.id)
-        ? prev.items.map((i) => (i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i))
-        : [...prev.items, { ...product, quantity }];
-
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
-      return { items, ...calculateTotals(items) };
-    });
-  };
-
-  //    const addToCart = (product: Omit<CartProductItem, "quantity">, quantity: number = 1) => {
-  //     setCart((prev) => {
-  //       const existingItem = prev.items.find((item) => item.id === product.id);
-  //       const items = existingItem
+  //       const items = prev.items.some((i) => i.id === product.id)
   //         ? prev.items.map((i) => (i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i))
   //         : [...prev.items, { ...product, quantity }];
 
@@ -82,22 +60,67 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   //     });
   //   };
 
-  const removeFromCart = (id: string) => {
+  const addToCart = (product: Omit<CartProductItem, "quantity">, quantity = 1) => {
     setCart((prev) => {
-      console.log("Removing ID:", id);
-      console.log(
-        "Cart items:",
-        prev.items.map((i) => i.id)
-      );
-      const items = prev.items.filter((i) => i.id !== id);
-      console.log(
-        "After removal:",
-        items.map((i) => i.id)
-      );
+      const exists = prev.items.find((i) => i.id === product.id);
+
+      let items: CartProductItem[];
+
+      if (exists) {
+        items = prev.items.map((i) => (i.id === product.id ? { ...i, quantity: i.quantity + quantity } : i));
+
+        toast.info(`${product.title} quantity updated`, {
+          toastId: `cart-${product.id}`,
+        });
+      } else {
+        items = [...prev.items, { ...product, quantity }];
+
+        toast.success(`${product.title} added to cart 🛒`, {
+          toastId: `cart-${product.id}`,
+        });
+      }
+
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
       return { items, ...calculateTotals(items) };
     });
   };
+
+  const removeFromCart = (id: string) => {
+    setCart((prev) => {
+      const removedItem = prev.items.find((i) => i.id === id);
+
+      if (!removedItem) {
+        return prev; // safety guard
+      }
+
+      const items = prev.items.filter((i) => i.id !== id);
+
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+
+      toast.warning(`${removedItem.title} removed from cart 🗑️`, {
+        toastId: `remove-${id}`,
+      });
+
+      return { items, ...calculateTotals(items) };
+    });
+  };
+
+  //   const removeFromCart = (id: string) => {
+  //     setCart((prev) => {
+  //       console.log("Removing ID:", id);
+  //       console.log(
+  //         "Cart items:",
+  //         prev.items.map((i) => i.id)
+  //       );
+  //       const items = prev.items.filter((i) => i.id !== id);
+  //       console.log(
+  //         "After removal:",
+  //         items.map((i) => i.id)
+  //       );
+  //       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  //       return { items, ...calculateTotals(items) };
+  //     });
+  //   };
 
   const clearCart = () => {
     localStorage.removeItem(CART_STORAGE_KEY);
