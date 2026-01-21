@@ -27,6 +27,9 @@ export function useProducts(categoryId?: string, searchTerm?: string) {
             id: doc.id,
             title: data.title ?? "",
             price: data.price ?? 0,
+            originalPrice: data.price ?? 0,
+            isDiscounted: data.isDiscounted ?? false,
+            isNew: data.isNew ?? false,
             categoryId: data.categoryId ?? "",
 
             imageSrc: data.imageSrc

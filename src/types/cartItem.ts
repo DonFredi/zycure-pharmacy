@@ -2,6 +2,9 @@ export type CartProductItem = {
   id: string; // products collection ID
   title: string;
   price: number;
+  originalPrice: number;
+  isDiscounted?: boolean;
+  isNew?: boolean;
   quantity: number;
   categoryId: string;
   benefit: string;

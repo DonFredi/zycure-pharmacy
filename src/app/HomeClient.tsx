@@ -7,12 +7,16 @@ import ProductSection from "./home/components/section/ProductSection";
 import ContactSection from "./contacts/components/section/ContactSection";
 import { useProducts } from "@/hooks/useProducts";
 import PageContainer from "@/components/pages/PageContainer";
+import Loader from "@/components/ui/Loader";
 
 const HomeClient = () => {
   const { products, loading } = useProducts();
+  const discountedProducts = products.filter((p) => p.isDiscounted && p.originalPrice);
+  const newProducts = products.filter((p) => p.isNew);
+  console.log(products);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader message="Loading Products..." />;
   }
   return (
     <PageContainer>
@@ -21,8 +25,8 @@ const HomeClient = () => {
       <CTASection />
       <CategorySection />
       <ProductSection title="Our Products" products={products} limit={4} viewMoreHref="/products" />
-      <ProductSection title="New Arrivals" products={products} limit={4} viewMoreHref="/products" />
-      <ProductSection title="Special Offers" products={products} limit={4} viewMoreHref="/products" />
+      <ProductSection title="New Arrivals" products={newProducts} limit={4} viewMoreHref="/products" />
+      <ProductSection title="Special Offers" products={discountedProducts} limit={4} viewMoreHref="/products" />
       {/* <ProductSection
         title="Special Offers"
         products={discountedProducts}
