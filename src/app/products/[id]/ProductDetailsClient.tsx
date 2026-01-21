@@ -33,13 +33,16 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
         id: product.id,
         title: product.title,
         price: product.price,
+        originalPrice: product.originalPrice ?? 0,
+        isDiscounted: product.isDiscounted,
+        isNew: product.isNew,
         imageSrc: product.imageSrc ?? null,
         categoryId: product.categoryId,
         benefit: product.benefit,
         description: product.description,
         use: product.use,
       },
-      quantity
+      quantity,
     );
   };
 
