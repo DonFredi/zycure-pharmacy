@@ -29,12 +29,12 @@ export default function QuantitySelector({ initialQuantity = 1, min = 1, max = 9
   };
 
   return (
-    <div className="flex items-center flex-row w-fit border rounded-full">
-      <button className="rounded-tl-full rounded-bl-full px-8 py-4 rounded-l-full border" onClick={handleDecrease}>
+    <div className="flex  justify-center gap-x-2 items-center flex-row  w-full">
+      <button className="rounded-sm  w-8 h-8 flex justify-center items-center border" onClick={handleDecrease}>
         -
       </button>
-      <span className="px-8 py-4 border">{quantity}</span>
-      <button className="rounded-tr-full rounded-br-full px-8 py-4 rounded-r-full border" onClick={handleIncrease}>
+      <span className="font-bold">{quantity}</span>
+      <button className="rounded-sm w-8 h-8 flex justify-center items-center border" onClick={handleIncrease}>
         +
       </button>
     </div>

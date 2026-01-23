@@ -6,6 +6,9 @@ import Logo from "@/components/ui/Logo";
 import { sidebarLinks } from "@/lib/sidebarMenu";
 import Cancel from "../icons/Cancel";
 import { Button } from "./Button";
+import Facebook from "../icons/Facebook";
+import TikTok from "../icons/TikTok";
+import Instagram from "../icons/Instagram";
 
 type Props = {
   isOpen: boolean;
@@ -29,15 +32,15 @@ const SidebarNav = ({ isOpen, setIsOpen }: Props) => {
         <Cancel />
       </Button>
       {/* Sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-50 w-3/4 max-w-xs bg-background shadow-lg flex flex-col">
+      <aside className="fixed inset-y-0 left-0 z-50 w-3/4 max-w-xs bg-background shadow-lg flex flex-col justify-between">
         {/* ───────── TOP ───────── */}
-        <div className="p-4 border-b">
+        <div className="p-2 ">
           <Logo />
         </div>
 
         {/* ───────── MIDDLE ───────── */}
-        <nav className="flex-1 overflow-y-auto">
-          <ul className="flex flex-col">
+        <nav>
+          <ul className="flex flex-col gap-2">
             {sidebarLinks.map((item) => {
               const Icon = item.icon;
               const isActive =
@@ -63,7 +66,17 @@ const SidebarNav = ({ isOpen, setIsOpen }: Props) => {
 
         {/* ───────── BOTTOM ───────── */}
         <div className="border-t p-4">
-          <p className="text-sm text-muted-foreground">Social media links</p>
+          <ul className="flex flex-row gap-4 text-primary justify-center items-center">
+            <Link href={"/"}>
+              <Facebook />
+            </Link>
+            <Link href={"/products"}>
+              <TikTok />
+            </Link>
+            <Link href={"/contacts"}>
+              <Instagram />
+            </Link>
+          </ul>
         </div>
       </aside>
     </>

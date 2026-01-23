@@ -49,17 +49,19 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
   return (
     <PageContainer>
       <Breadcrumb lastLabel={product.title} />
-      <SectionContainer className="flex flex-col md:flex-row gap-2">
-        <div className="w-full md:w-1/2">
-          <Image
-            src={product.imageSrc?.url || "/images/placeholder.png"}
-            alt={product.title}
-            width={480}
-            height={150}
-            className="object-cover"
-          />
+      <SectionContainer className="flex flex-col md:flex-row gap-y-4 md:gap-y-0">
+        <div className="w-full md:w-1/2 p-2">
+          <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden">
+            <Image
+              src={product.imageSrc?.url || "/images/placeholder.png"}
+              alt={product.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
         </div>
-        <div className="gap-2 flex flex-col items-left w-full md:w-1/2 h-full">
+        <div className="gap-2 p-2 flex flex-col place-content-center items-left w-full md:w-1/2 h-full">
           {/* <p className="text-foreground-disabled">{product.categoryId}</p> */}
           <h4 className="font-semibold">{product.title}</h4>
           <p className="text-primary font-bold text-xl">Kshs {product.price}</p>
