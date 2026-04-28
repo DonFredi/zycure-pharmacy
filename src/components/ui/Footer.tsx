@@ -66,7 +66,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="text-primary hover:underline"
           >
-            Scripttag
+            ScriptTag
           </a>
         </p>
 
