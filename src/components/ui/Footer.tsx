@@ -59,14 +59,14 @@ const Footer = () => {
           </div>
         </div>
         <p>
-          Powered by{" "}
+          Developed by{" "}
           <a
-            href="https://dondadiportfolio.netlify.app/"
+            href="https://scripttag-sigma.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary underline hover:no-underline"
+            className="text-primary hover:underline"
           >
-            DON DEVELOPER
+            Scripttag
           </a>
         </p>
 
