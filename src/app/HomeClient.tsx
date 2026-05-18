@@ -16,7 +16,7 @@ const HomeClient = () => {
   console.log(products);
 
   if (loading) {
-    return <Loader message="Loading Products..." />;
+    return <Loader message="Loading..." />;
   }
   return (
     <PageContainer>
