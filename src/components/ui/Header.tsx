@@ -20,7 +20,7 @@ const Header = ({ setIsOpen }: HeaderProps) => {
           <Menu />
         </button>
         <Logo />
-        <nav className="hidden md:flex flex-row gap-6 justify-center h-fit">
+        <nav className="hidden md:flex flex-row gap-4 justify-center ">
           <NavLink href="/" label="Home" />
           <NavLink href="/products" label="Products" />
           <NavLink href="/contacts" label="Contacts" />
